@@ -33,7 +33,7 @@ public class WaggleMeter : MonoBehaviour
         leftLastPos = Left.transform.position;
         rightLastPos = Right.transform.position;
 
-        leftDist = (Head.transform.position - Left.transform.position).magnitude
+        leftDist = (Head.transform.position - Left.transform.position).magnitude;
         rightDist = (Head.transform.position - Right.transform.position).magnitude;
 
         LeftDistanceMeter.transform.localScale = new Vector3(1, leftDist, 1);

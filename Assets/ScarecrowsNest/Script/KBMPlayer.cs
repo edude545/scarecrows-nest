@@ -7,6 +7,7 @@ public class KBMPlayer : MonoBehaviour
 
     public float Speed = 0.5f;
     public float Sensitivity = 3f;
+    public float SpookAmount = 0.1f;
 
     float dmx = 0f;
     float dmy = 0f;
@@ -38,6 +39,14 @@ public class KBMPlayer : MonoBehaviour
         transform.rotation = Quaternion.Euler(-dmy, dmx, 0);
 
         transform.position += transform.rotation * v;
+
+        if (Input.GetKey("space"))
+        {
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Bird"))
+            {
+                obj.GetComponent<Crow>().Spook(SpookAmount);
+            }
+        }
 
     }
 

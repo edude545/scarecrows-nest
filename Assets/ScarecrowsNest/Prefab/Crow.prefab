@@ -62,9 +62,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1713016554527249575}
+  - component: {fileID: 8184774832689586645}
+  - component: {fileID: 2296693921655641890}
   m_Layer: 0
   m_Name: Crow
-  m_TagString: Untagged
+  m_TagString: Bird
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,6 +87,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8184774832689586645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2883776376815843897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16795f14a84c63544bad7698e48905b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FlySpeed: 0.05
+  Braveness: 1
+  FearDecay: 0.001
+  CorrectionWeight: 0.5
+  animator: {fileID: 6279702119072625714}
+  Target: {fileID: 0}
+  Fear: 0
+  Fleeing: 0
+  DespawnRange: 5000
+  Velocity: {x: 0, y: 0, z: 0}
+--- !u!114 &2296693921655641890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2883776376815843897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e4b10bc1d93b8446abf16a09e778338, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2922462816774090281
 GameObject:
   m_ObjectHideFlags: 0

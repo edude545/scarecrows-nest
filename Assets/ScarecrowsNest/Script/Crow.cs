@@ -4,23 +4,53 @@ using UnityEngine;
 
 public class Crow : MonoBehaviour
 {
-
-    public float FlySpeed = 1f;
+    public float FlySpeed = 0.01f;
+    public float Braveness = 1f;
+    public float FearDecay = 1f;
+    public float CorrectionWeight = 0.5f;
     public Animator animator;
 
-    GameObject target;
+    public GameObject Target;
 
-    Vector3 velocity;
+    public float Fear = 0f;
+    public bool Fleeing = false;
 
-    private void Awake()
+    public float DespawnRange = 5000f;
+
+    public Vector3 Velocity;
+
+    private void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
+        Target = GameController.Player;
     }
 
     private void Update()
     {
-        Vector3 acceleration = (target.transform.position - transform.position).normalized * FlySpeed;
-        
+        Velocity = (Target.transform.position - transform.position).normalized * FlySpeed * (Fleeing ? -50 : 1);
+        transform.position += Velocity;
+
+        if (transform.position.magnitude > DespawnRange)
+        {
+            Destroy(gameObject);
+        }
+
+        if (Velocity.magnitude > 0.01f)
+        {
+            transform.rotation = Quaternion.LookRotation(Velocity);
+        }
+
+        Spook(GameController.WaggleScore);
+
+        Fear = Mathf.Max(Fear - FearDecay, 0);
+    }
+
+    public void Spook(float f)
+    {
+        Fear += f;
+        if (Fear >= Braveness)
+        {
+            Fleeing = true;
+        }
     }
 
 }

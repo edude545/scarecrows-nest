@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController Instance;
 
     public GameObject CrowPrefab;
+    public GameObject BasicCropPrefab;
 
     public float SpawnDistance = 100f;
 
@@ -25,6 +27,10 @@ public class GameController : MonoBehaviour
     public bool KBMDebug = false;
     public GameObject KBMPlayerPrefab;
     public GameObject VRPlayerPrefab;
+
+    private void Awake() {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -52,13 +58,24 @@ public class GameController : MonoBehaviour
         }
     }
 
+    void onCycleEnd() {
+
+    }
+
     private IEnumerator spawnBird()
     {
         GameObject bird;
         while (true)
         {
             bird = Instantiate(CrowPrefab);
-            bird.transform.position = Random.onUnitSphere * SpawnDistance;
+            Vector3 spawn = Random.onUnitSphere * SpawnDistance;
+            if (spawn.y < 0) {
+                spawn.y = -spawn.y;
+            }
+            if (spawn.y < 10) {
+                spawn.y = 10;
+            }
+            bird.transform.position = spawn;
             yield return new WaitForSeconds(3f);
         }
     }

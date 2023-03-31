@@ -99,15 +99,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16795f14a84c63544bad7698e48905b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlySpeed: 0.05
+  FlySpeed: 0.01
   Braveness: 1
-  FearDecay: 0.001
+  FearDecay: 0.002
   CorrectionWeight: 0.5
   animator: {fileID: 6279702119072625714}
   Target: {fileID: 0}
   Fear: 0
   Fleeing: 0
-  DespawnRange: 5000
+  DespawnRange: 200
+  FleeSpeed: 20
   Velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &2296693921655641890
 MonoBehaviour:

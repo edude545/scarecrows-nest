@@ -7,7 +7,7 @@ public class KBMPlayer : MonoBehaviour
 
     public float Speed = 0.5f;
     public float Sensitivity = 3f;
-    public float SpookAmount = 0.1f;
+    public float SpookAmount = 0.01f;
 
     float dmx = 0f;
     float dmy = 0f;
@@ -46,6 +46,13 @@ public class KBMPlayer : MonoBehaviour
             {
                 obj.GetComponent<Crow>().Spook(SpookAmount);
             }
+        }
+
+        if (Input.GetMouseButtonDown(0)) // left
+        {
+            Ray ray = Camera.allCameras[0].ScreenPointToRay(Vector3.zero);
+            GameObject crop = Instantiate(GameController.Instance.BasicCropPrefab);
+            crop.transform.position = ray.GetPoint(-ray.origin.y / ray.direction.y); // Get point at which ray intersects y=0
         }
 
     }

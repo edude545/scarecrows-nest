@@ -6,7 +6,7 @@ public class Crow : MonoBehaviour
 {
     public float FlySpeed = 0.01f;
     public float Braveness = 1f;
-    public float FearDecay = 1f;
+    public float FearDecay = 0.002f;
     public float CorrectionWeight = 0.5f;
     public Animator animator;
 
@@ -15,7 +15,8 @@ public class Crow : MonoBehaviour
     public float Fear = 0f;
     public bool Fleeing = false;
 
-    public float DespawnRange = 5000f;
+    public float DespawnRange = 200f;
+    public float FleeSpeed = 20f;
 
     public Vector3 Velocity;
 
@@ -26,7 +27,7 @@ public class Crow : MonoBehaviour
 
     private void Update()
     {
-        Velocity = (Target.transform.position - transform.position).normalized * FlySpeed * (Fleeing ? -50 : 1);
+        Velocity = (Target.transform.position - transform.position).normalized * FlySpeed * (Fleeing ? -FleeSpeed : 1);
         transform.position += Velocity;
 
         if (transform.position.magnitude > DespawnRange)

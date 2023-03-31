@@ -23,6 +23,7 @@ public class Crow : MonoBehaviour
     private void Start()
     {
         Target = GameController.Player;
+        beginFlight();
     }
 
     private void Update()
@@ -45,11 +46,20 @@ public class Crow : MonoBehaviour
         Fear = Mathf.Max(Fear - FearDecay, 0);
     }
 
+    void beginFlight()
+    {
+        animator.SetBool("airborne", true);
+        animator.SetBool("moving", true);
+        animator.SetBool("attacking", false);
+        animator.SetBool("eating", false);
+    }
+
     public void Spook(float f)
     {
         Fear += f;
         if (Fear >= Braveness)
         {
+            beginFlight();
             Fleeing = true;
         }
     }

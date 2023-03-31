@@ -716,6 +716,7 @@ MonoBehaviour:
   RightDistanceMeter: {fileID: 4622884070037924744}
   LeftWaggleMeter: {fileID: 4622884071565477391}
   RightWaggleMeter: {fileID: 4622884070757901295}
+  TextDisplay: {fileID: 6670242612091345195}
 --- !u!1 &7482785098770357590
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ using UnityEngine;
 public class KBMPlayer : MonoBehaviour
 {
 
+    public GameObject Cam;
+
     public float Speed = 0.5f;
     public float Sensitivity = 3f;
     public float SpookAmount = 0.01f;
@@ -36,9 +38,9 @@ public class KBMPlayer : MonoBehaviour
         dmx += Input.GetAxis("Mouse X") * Sensitivity;
         dmy += Input.GetAxis("Mouse Y") * Sensitivity;
 
-        transform.rotation = Quaternion.Euler(-dmy, dmx, 0);
+        Cam.transform.rotation = Quaternion.Euler(-dmy, dmx, 0);
 
-        transform.position += transform.rotation * v;
+        transform.position += Cam.transform.rotation * v;
 
         if (Input.GetKey("space"))
         {
@@ -48,12 +50,13 @@ public class KBMPlayer : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0)) // left
+        if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.allCameras[0].ScreenPointToRay(Vector3.zero);
+            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
             GameObject crop = Instantiate(GameController.Instance.BasicCropPrefab);
             crop.transform.position = ray.GetPoint(-ray.origin.y / ray.direction.y); // Get point at which ray intersects y=0
         }
+            
 
     }
 

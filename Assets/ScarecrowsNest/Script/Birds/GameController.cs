@@ -9,6 +9,9 @@ public class GameController : MonoBehaviour
     public GameObject CrowPrefab;
     public GameObject BasicCropPrefab;
 
+    public float WaggleScoreMultiplier = 0.25f;
+    public float SpawnInterval = 3f;
+
     public float SpawnDistance = 100f;
 
     public static GameObject Player;
@@ -54,7 +57,7 @@ public class GameController : MonoBehaviour
             RightHandLastPos = RightHand.transform.position;
             LeftArmExtension = (Head.transform.position - LeftHand.transform.position).magnitude;
             RightArmExtension = (Head.transform.position - RightHand.transform.position).magnitude;
-            WaggleScore = Mathf.Clamp01(LeftHandPosDelta + RightHandPosDelta);
+            WaggleScore = Mathf.Clamp01(LeftHandPosDelta + RightHandPosDelta) * WaggleScoreMultiplier;
         }
     }
 
@@ -76,7 +79,7 @@ public class GameController : MonoBehaviour
                 spawn.y = 10;
             }
             bird.transform.position = spawn;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(SpawnInterval);
         }
     }
 

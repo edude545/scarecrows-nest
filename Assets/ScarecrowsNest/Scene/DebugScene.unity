@@ -417,7 +417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
       propertyPath: KBMDebug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
       propertyPath: CrowPrefab
@@ -428,9 +428,13 @@ PrefabInstance:
       value: 1.59
       objectReference: {fileID: 0}
     - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
+      propertyPath: UICanvasPrefab
+      value: 
+      objectReference: {fileID: 1797254991410841072, guid: cc669f7f5dd22a54da9ca8c3d23fbaa6, type: 3}
+    - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
       propertyPath: VRPlayerPrefab
       value: 
-      objectReference: {fileID: 146900, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
+      objectReference: {fileID: 107946, guid: adf1d9b9a2bdcdb4dbe7a870bd5f6069, type: 3}
     - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
       propertyPath: BasicCropPrefab
       value: 

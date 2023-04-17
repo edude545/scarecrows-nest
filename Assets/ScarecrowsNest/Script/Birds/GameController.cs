@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour
     public bool KBMDebug = false;
     public GameObject KBMPlayerPrefab;
     public GameObject VRPlayerPrefab;
+    public Canvas UICanvasPrefab;
 
     private void Awake() {
         Instance = this;
@@ -37,14 +38,20 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(spawnBird());
+        //StartCoroutine(spawnBird());
         Player = Instantiate(KBMDebug ? KBMPlayerPrefab : VRPlayerPrefab);
+        Canvas canv = Instantiate(UICanvasPrefab);
         if (!KBMDebug)
         {
-            LeftHand = Player.transform.GetChild(0).gameObject;
-            RightHand = Player.transform.GetChild(1).gameObject;
-            Head = Player.transform.GetChild(2).gameObject;
+            Transform steamVRObjects = Player.transform.Find("SteamVRObjects");
+            LeftHand = steamVRObjects.Find("LeftHand").gameObject;
+            RightHand = steamVRObjects.Find("RightHand").gameObject;
+            Head = steamVRObjects.Find("VRCamera").gameObject;
+            canv.worldCamera = Head.GetComponent<Camera>();
+        } else {
+            canv.worldCamera = Player.transform.GetChild(0).GetComponent<Camera>();
         }
+        canv.planeDistance = 0.5f;
     }
 
     private void Update()

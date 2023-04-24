@@ -76,6 +76,12 @@ public class ScarecrowPlayer : MonoBehaviour
             LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabFarmer);
             RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabFarmer);
         }
+
+        foreach (GameObject obj in GameController.Instance.SeedBags)
+        {
+            obj.SetActive(true);
+        }
+
         Debug.Log("Farmer mode: " + FarmerMode);
     }
 

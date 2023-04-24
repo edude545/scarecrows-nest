@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
     public static GameObject RightHand;
     public static GameObject Head;
 
+    public HashSet<GameObject> SeedBags = new HashSet<GameObject>();
+
     public static float LeftArmExtension;
     public static float RightArmExtension;
     public static Vector3 LeftHandLastPos;

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.Extras;
+using Valve.VR.InteractionSystem;
 
 public class ScarecrowPlayer : MonoBehaviour
 {
 
-    public bool FarmerMode;
+    public bool FarmerMode = true;
 
     public GameObject LeftHand;
     public GameObject RightHand;
@@ -15,56 +16,67 @@ public class ScarecrowPlayer : MonoBehaviour
 
     BeltObject heldObject;
 
-    public SteamVR_Action_Boolean LaserPointer;
     public SteamVR_Action_Boolean DebugModeToggle;
+
+    public GameObject LeftHandModelPrefabScarecrow;
+    public GameObject RightHandModelPrefabScarecrow;
+    public GameObject LeftHandModelPrefabFarmer;
+    public GameObject RightHandModelPrefabFarmer;
+
+    protected Crop SelectedCrop;
 
     private void Start()
     {
-        LaserPointer.AddOnStateDownListener(onLaserPointerOn, SteamVR_Input_Sources.Any);
-        LaserPointer.AddOnStateUpListener(onLaserPointerOff, SteamVR_Input_Sources.Any);
-        DebugModeToggle.AddOnStateUpListener(debugToggleMode, SteamVR_Input_Sources.Any);
+        /*SteamVR_LaserPointer laser = RightHand.GetComponent<SteamVR_LaserPointer>();
+        laser.PointerIn += PointerInside;
+        laser.PointerOut += PointerOutside;
+        laser.PointerClick += PointerClick;*/
+        DebugModeToggle.AddOnStateUpListener(debugToggleMode, SteamVR_Input_Sources.RightHand);
     }
 
-    protected void onLaserPointerOn(SteamVR_Action_Boolean action, SteamVR_Input_Sources source)
+    /*public void PointerClick(object sender, PointerEventArgs ev)
     {
-        if (FarmerMode)
+        Crop crop = ev.target.gameObject.GetComponent<Crop>();
+        if (crop != null)
         {
-            Debug.Log(source.ToString()); // This prints "any" :(
-            if (source == SteamVR_Input_Sources.RightHand) {
-                LeftHand.GetComponent<SteamVR_LaserPointer>().active = true;
-            } else if (source == SteamVR_Input_Sources.LeftHand) {
-                RightHand.GetComponent<SteamVR_LaserPointer>().active = true;
-            }
+            SelectedCrop = crop;
         }
     }
 
-    protected void onLaserPointerOff(SteamVR_Action_Boolean action, SteamVR_Input_Sources source)
+    public void PointerInside(object sender, PointerEventArgs ev)
     {
-        if (FarmerMode)
+        Crop crop = ev.target.gameObject.GetComponent<Crop>();
+        if (crop != null)
         {
-            if (source == SteamVR_Input_Sources.RightHand)
-            {
-                LeftHand.GetComponent<SteamVR_LaserPointer>().active = false;
-            }
-            else if (source == SteamVR_Input_Sources.LeftHand)
-            {
-                RightHand.GetComponent<SteamVR_LaserPointer>().active = false;
-            }
+            crop.OnPointerEnter();
         }
     }
+
+    public void PointerOutside(object sender, PointerEventArgs ev)
+    {
+        Crop crop = ev.target.gameObject.GetComponent<Crop>();
+        if (crop != null)
+        {
+            crop.OnPointerExit();
+        }
+    }*/
 
     protected void debugToggleMode(SteamVR_Action_Boolean action, SteamVR_Input_Sources source)
     {
         if (FarmerMode)
         {
             FarmerMode = false;
-            LeftHand.GetComponent<SteamVR_LaserPointer>().active = false;
-            RightHand.GetComponent<SteamVR_LaserPointer>().active = false;
+            //RightHand.GetComponent<SteamVR_LaserPointer>().active = false;
+            LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabScarecrow);
+            RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabScarecrow);
         } else
         {
             FarmerMode = true;
+            //RightHand.GetComponent<SteamVR_LaserPointer>().active = true;
+            LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabFarmer);
+            RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabFarmer);
         }
-        Debug.Log(FarmerMode);
+        Debug.Log("Farmer mode: " + FarmerMode);
     }
 
 

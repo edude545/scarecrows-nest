@@ -20,7 +20,10 @@ public class GameController : MonoBehaviour
     public static GameObject RightHand;
     public static GameObject Head;
 
+    public HashSet<Crop> Crops = new HashSet<Crop>(); 
     public HashSet<GameObject> SeedBags = new HashSet<GameObject>();
+
+    public Dictionary<string, int> Resources = new Dictionary<string, int>();
 
     public static float LeftArmExtension;
     public static float RightArmExtension;
@@ -72,7 +75,15 @@ public class GameController : MonoBehaviour
     }
 
     void onCycleEnd() {
-
+        foreach (Crop crop in Crops)
+        {
+            int yield = crop.OnCycleEnd();
+            if (yield > 0)
+            {
+                int n = Resources.ContainsKey(crop.PlantType.Name) ? Resources[crop.PlantType.Name] : 0;
+                Resources[crop.PlantType.Name] = n + yield;
+            }
+        }
     }
 
     private IEnumerator spawnBird()

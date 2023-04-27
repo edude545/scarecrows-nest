@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8347563060031008717}
   - component: {fileID: 8347563060031008716}
+  - component: {fileID: -7086365868828180719}
   m_Layer: 0
   m_Name: KBMPlayer
   m_TagString: Player
@@ -125,6 +126,29 @@ MonoBehaviour:
   Speed: 0.2
   Sensitivity: 3
   SpookAmount: 0.01
+--- !u!114 &-7086365868828180719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8347563060031008715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d419461582c2849bf1f3e70941bdaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FarmerMode: 1
+  LeftHand: {fileID: 0}
+  RightHand: {fileID: 0}
+  Head: {fileID: 0}
+  DebugModeToggle:
+    actionPath: 
+    needsReinit: 0
+  LeftHandModelPrefabScarecrow: {fileID: 0}
+  RightHandModelPrefabScarecrow: {fileID: 0}
+  LeftHandModelPrefabFarmer: {fileID: 0}
+  RightHandModelPrefabFarmer: {fileID: 0}
 --- !u!1 &8599703761678404653
 GameObject:
   m_ObjectHideFlags: 0

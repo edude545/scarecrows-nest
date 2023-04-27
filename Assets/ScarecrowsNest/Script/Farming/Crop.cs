@@ -25,8 +25,7 @@ public class Crop : MonoBehaviour
     protected static Material highlightMat;*/
     // ---
 
-    public int GrowTime;
-    public int GrowStage;
+    public int GrowthStage;
     public Plant PlantType;
     public int PlantedSeeds = 0;
 
@@ -90,14 +89,26 @@ public class Crop : MonoBehaviour
         }
     }
 
-    public void OnCycleEnd() {
+    // Returns the number of resources yielded by the crop this cycle. Called from GameController#onCycleEnd.
+    public int OnCycleEnd() {
         updateModel();
+        GrowthStage++;
+        if (GrowthStage == PlantType.GrowthTime) {
+            int yield = Random.Range(PlantType.MinYield, PlantType.MaxYield);
+            PlantType = null;
+            GrowthStage = 0;
+            return yield;
+        }
+        return 0;
     }
 
     private void updateModel() {
         // todo: allow separate models for growth stages
-        float s = GrowStage / GrowTime;
-        gameObject.transform.localScale = new Vector3(s,s,s);
+        if (PlantType != null)
+        {
+            float s = (GrowthStage + 1) / (PlantType.GrowthTime + 1); // Add 1 to values so the crop is visible at stage 0
+            gameObject.transform.localScale = new Vector3(s, s, s);
+        }
     }
 
     // Everything below is highlight code copied from Interactable

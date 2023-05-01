@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
-public class GameController : MonoBehaviour
-{
+public class GameController : MonoBehaviour {
     public static GameController Instance;
 
     public GameObject CrowPrefab;
@@ -22,8 +21,13 @@ public class GameController : MonoBehaviour
 
     public HashSet<Crop> Crops = new HashSet<Crop>(); 
     public HashSet<GameObject> SeedBags = new HashSet<GameObject>();
+    public Crow[] Birds;
 
     public Dictionary<string, int> Resources = new Dictionary<string, int>();
+
+    GameState gameState = GameState.Farm;
+    float roundTimer = 0f; // seconds
+    float roundEndTime = 60f;
 
     public static float LeftArmExtension;
     public static float RightArmExtension;
@@ -38,13 +42,19 @@ public class GameController : MonoBehaviour
     public GameObject VRPlayerPrefab;
     public Canvas UICanvasPrefab;
 
+    enum GameState {
+        Farm, // Allow player to plant seeds
+        Shop, // Allow player to buy upgrades
+        Scarecrow, // Spawn birds
+        ScarecrowEnd, // No birds spawn; move to next game phase once all birds have been scared away
+    }
+
     private void Awake() {
         Instance = this;
     }
 
     private void Start()
     {
-        //StartCoroutine(spawnBird());
         Player = Instantiate(KBMDebug ? KBMPlayerPrefab : VRPlayerPrefab);
         Canvas canv = Instantiate(UICanvasPrefab);
         if (!KBMDebug)
@@ -62,8 +72,40 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if (!KBMDebug)
-        {
+        if (gameState == GameState.Scarecrow) {
+            calculateWaggle();
+            roundTimer += Time.deltaTime;
+            if (roundTimer >= roundEndTime || Input.GetKeyDown("c")) {
+                changeGameState(GameState.ScarecrowEnd);
+            }
+        } else if (gameState == GameState.ScarecrowEnd) {
+            calculateWaggle();
+            if (Birds.Length == 0) {
+                changeGameState(GameState.Farm);
+            }
+        } else if (gameState == GameState.Farm) {
+            if (Input.GetKeyDown("m")) {
+                changeGameState(GameState.Shop);
+            }
+        } else if (gameState == GameState.Shop) {
+            if (Input.GetKeyDown("m")) {
+                changeGameState(GameState.Farm);
+            }
+        }
+    }
+
+    private void changeGameState(GameState gs) {
+        gameState = gs;
+        if (gameState == GameState.Scarecrow) {
+            StartCoroutine(spawnBird());
+        } else if (gameState == GameState.ScarecrowEnd) {
+        } else if (gameState == GameState.Farm) {
+        } else if (gameState == GameState.Shop) {
+        }
+    }
+
+    private void calculateWaggle() {
+        if (!KBMDebug) {
             LeftHandPosDelta = (LeftHandLastPos - LeftHand.transform.position).magnitude;
             RightHandPosDelta = (RightHandLastPos - RightHand.transform.position).magnitude;
             LeftHandLastPos = LeftHand.transform.position;
@@ -74,7 +116,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void onCycleEnd() {
+    private void onCycleEnd() {
         foreach (Crop crop in Crops)
         {
             int yield = crop.OnCycleEnd();
@@ -86,11 +128,9 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private IEnumerator spawnBird()
-    {
+    private IEnumerator spawnBird() {
         GameObject bird;
-        while (true)
-        {
+        while (true) {
             bird = Instantiate(CrowPrefab);
             Vector3 spawn = Random.onUnitSphere * SpawnDistance;
             if (spawn.y < 0) {

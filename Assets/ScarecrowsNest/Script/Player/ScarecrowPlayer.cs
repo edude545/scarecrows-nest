@@ -10,10 +10,6 @@ public class ScarecrowPlayer : MonoBehaviour
 
     public bool FarmerMode = true;
 
-    public GameObject LeftHand;
-    public GameObject RightHand;
-    public GameObject Head;
-
     BeltObject heldObject;
 
     public SteamVR_Action_Boolean DebugModeToggle;
@@ -25,6 +21,8 @@ public class ScarecrowPlayer : MonoBehaviour
 
     protected Crop SelectedCrop;
 
+    public float DebugSpookAmount = 0.2f;
+
     private void Start()
     {
         /*SteamVR_LaserPointer laser = RightHand.GetComponent<SteamVR_LaserPointer>();
@@ -32,6 +30,14 @@ public class ScarecrowPlayer : MonoBehaviour
         laser.PointerOut += PointerOutside;
         laser.PointerClick += PointerClick;*/
         DebugModeToggle.AddOnStateUpListener(debugToggleMode, SteamVR_Input_Sources.RightHand);
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown("space")) {
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Bird")) {
+                obj.GetComponent<Crow>().Spook(DebugSpookAmount);
+            }
+        }
     }
 
     /*public void PointerClick(object sender, PointerEventArgs ev)
@@ -67,14 +73,18 @@ public class ScarecrowPlayer : MonoBehaviour
         {
             FarmerMode = false;
             //RightHand.GetComponent<SteamVR_LaserPointer>().active = false;
-            LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabScarecrow);
-            RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabScarecrow);
+            if (!GameController.Instance.VRFallback) {
+                GameController.Instance.LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabScarecrow);
+                GameController.Instance.RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabScarecrow);
+            }
         } else
         {
             FarmerMode = true;
             //RightHand.GetComponent<SteamVR_LaserPointer>().active = true;
-            LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabFarmer);
-            RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabFarmer);
+            if (!GameController.Instance.VRFallback) {
+                GameController.Instance.LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabFarmer);
+                GameController.Instance.RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabFarmer);
+            }
         }
 
         foreach (GameObject obj in GameController.Instance.SeedBags)

@@ -14,10 +14,10 @@ public class GameController : MonoBehaviour {
 
     public float SpawnDistance = 100f;
 
-    public static GameObject Player;
-    public static GameObject LeftHand;
-    public static GameObject RightHand;
-    public static GameObject Head;
+    public GameObject Player;
+    public GameObject LeftHand;
+    public GameObject RightHand;
+    public GameObject Head;
 
     public HashSet<Crop> Crops = new HashSet<Crop>(); 
     public HashSet<GameObject> SeedBags = new HashSet<GameObject>();
@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour {
 
     GameState gameState = GameState.Farm;
     float roundTimer = 0f; // seconds
-    float roundEndTime = 60f;
+    float roundEndTime = 5f;
 
     public static float LeftArmExtension;
     public static float RightArmExtension;
@@ -37,9 +37,7 @@ public class GameController : MonoBehaviour {
     public static float RightHandPosDelta;
     public static float WaggleScore;
 
-    public bool KBMDebug = false;
-    public GameObject KBMPlayerPrefab;
-    public GameObject VRPlayerPrefab;
+    public bool VRFallback = false;
     public Canvas UICanvasPrefab;
 
     enum GameState {
@@ -55,18 +53,18 @@ public class GameController : MonoBehaviour {
 
     private void Start()
     {
-        Player = Instantiate(KBMDebug ? KBMPlayerPrefab : VRPlayerPrefab);
         Canvas canv = Instantiate(UICanvasPrefab);
-        if (!KBMDebug)
-        {
+        if (VRFallback) {
+            Transform noSteamVRFallbackObjects = Player.transform.Find("NoSteamVRFallbackObjects");
+            RightHand = noSteamVRFallbackObjects.Find("FallbackHand").gameObject;
+            Head = noSteamVRFallbackObjects.Find("FallbackObjects").gameObject;
+        } else {
             Transform steamVRObjects = Player.transform.Find("SteamVRObjects");
             LeftHand = steamVRObjects.Find("LeftHand").gameObject;
             RightHand = steamVRObjects.Find("RightHand").gameObject;
             Head = steamVRObjects.Find("VRCamera").gameObject;
-            canv.worldCamera = Head.GetComponent<Camera>();
-        } else {
-            canv.worldCamera = Player.transform.GetChild(0).GetComponent<Camera>();
         }
+        canv.worldCamera = Head.GetComponent<Camera>();
         canv.planeDistance = 0.5f;
     }
 
@@ -76,19 +74,26 @@ public class GameController : MonoBehaviour {
             calculateWaggle();
             roundTimer += Time.deltaTime;
             if (roundTimer >= roundEndTime || Input.GetKeyDown("c")) {
+                Debug.Log("Scarecrow phase ending...");
                 changeGameState(GameState.ScarecrowEnd);
             }
         } else if (gameState == GameState.ScarecrowEnd) {
             calculateWaggle();
             if (Birds.Length == 0) {
+                Debug.Log("Entering farm phase");
                 changeGameState(GameState.Farm);
             }
         } else if (gameState == GameState.Farm) {
             if (Input.GetKeyDown("m")) {
+                Debug.Log("Switched to shop phase");
                 changeGameState(GameState.Shop);
+            } else if (Input.GetKeyDown("c")) {
+                Debug.Log("Scarecrow phase beginning");
+                changeGameState(GameState.Scarecrow);
             }
         } else if (gameState == GameState.Shop) {
             if (Input.GetKeyDown("m")) {
+                Debug.Log("Switched to farm phase");
                 changeGameState(GameState.Farm);
             }
         }
@@ -105,15 +110,13 @@ public class GameController : MonoBehaviour {
     }
 
     private void calculateWaggle() {
-        if (!KBMDebug) {
-            LeftHandPosDelta = (LeftHandLastPos - LeftHand.transform.position).magnitude;
-            RightHandPosDelta = (RightHandLastPos - RightHand.transform.position).magnitude;
-            LeftHandLastPos = LeftHand.transform.position;
-            RightHandLastPos = RightHand.transform.position;
-            LeftArmExtension = (Head.transform.position - LeftHand.transform.position).magnitude;
-            RightArmExtension = (Head.transform.position - RightHand.transform.position).magnitude;
-            WaggleScore = Mathf.Clamp01(LeftHandPosDelta + RightHandPosDelta) * WaggleScoreMultiplier;
-        }
+        LeftHandPosDelta = (LeftHandLastPos - LeftHand.transform.position).magnitude;
+        RightHandPosDelta = (RightHandLastPos - RightHand.transform.position).magnitude;
+        LeftHandLastPos = LeftHand.transform.position;
+        RightHandLastPos = RightHand.transform.position;
+        LeftArmExtension = (Head.transform.position - LeftHand.transform.position).magnitude;
+        RightArmExtension = (Head.transform.position - RightHand.transform.position).magnitude;
+        WaggleScore = Mathf.Clamp01(LeftHandPosDelta + RightHandPosDelta) * WaggleScoreMultiplier;
     }
 
     private void onCycleEnd() {

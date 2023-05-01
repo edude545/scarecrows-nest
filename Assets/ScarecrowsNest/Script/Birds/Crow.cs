@@ -22,7 +22,7 @@ public class Crow : MonoBehaviour
 
     private void Start()
     {
-        Target = GameController.Player;
+        Target = GameController.Instance.Player;
         beginFlight();
     }
 

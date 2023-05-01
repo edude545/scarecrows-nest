@@ -54,7 +54,7 @@ public class Crop : MonoBehaviour
 
     private void Update()
     {
-        Canvas.transform.LookAt(GameController.Head.transform);
+        Canvas.transform.LookAt(GameController.Instance.Head.transform);
     }
 
     public void ReceiveSeed(Seed seed)

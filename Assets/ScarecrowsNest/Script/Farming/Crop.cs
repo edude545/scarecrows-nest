@@ -29,6 +29,8 @@ public class Crop : MonoBehaviour
     public Plant PlantType;
     public int PlantedSeeds = 0;
 
+    public float HP;
+
     protected virtual void Start()
     {
         // Highlight code from Interactable

@@ -6,7 +6,7 @@ public class BirdHealthBar : MonoBehaviour
 {
 
     GameObject bar;
-    Crow crow;
+    Bird crow;
 
     MaterialPropertyBlock propBlock;
 
@@ -32,7 +32,7 @@ public class BirdHealthBar : MonoBehaviour
 
     private void Start()
     {
-        crow = gameObject.GetComponent<Crow>();
+        crow = gameObject.GetComponent<Bird>();
     }
 
     private void Update()

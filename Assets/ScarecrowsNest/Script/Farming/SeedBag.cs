@@ -10,12 +10,6 @@ public class SeedBag : UIElement
     public Plant PlantType;
     public GameObject SeedPrefab;
 
-    private void Start()
-    {
-        Debug.Log("adding seedbag");
-        GameController.Instance.SeedBags.Add(gameObject);
-    }
-
     public void SpawnSeed(Hand hand)
     {
         if (hand == null)

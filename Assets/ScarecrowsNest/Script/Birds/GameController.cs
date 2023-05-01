@@ -19,9 +19,10 @@ public class GameController : MonoBehaviour {
     public GameObject RightHand;
     public GameObject Head;
 
-    public HashSet<Crop> Crops = new HashSet<Crop>(); 
-    public HashSet<GameObject> SeedBags = new HashSet<GameObject>();
-    public Crow[] Birds;
+    public GameObject LiveCrops;
+    public GameObject DeadCrops;
+    public GameObject SeedBags;
+    public GameObject Birds;
 
     public Dictionary<string, int> Resources = new Dictionary<string, int>();
 
@@ -79,7 +80,7 @@ public class GameController : MonoBehaviour {
             }
         } else if (gameState == GameState.ScarecrowEnd) {
             calculateWaggle();
-            if (Birds.Length == 0) {
+            if (Birds.transform.childCount == 0) {
                 Debug.Log("Entering farm phase");
                 changeGameState(GameState.Farm);
             }
@@ -120,8 +121,9 @@ public class GameController : MonoBehaviour {
     }
 
     private void onCycleEnd() {
-        foreach (Crop crop in Crops)
+        for (int i = 0; i < LiveCrops.transform.childCount; i++)
         {
+            Crop crop = LiveCrops.transform.GetChild(i).GetComponent<Crop>();
             int yield = crop.OnCycleEnd();
             if (yield > 0)
             {
@@ -134,7 +136,7 @@ public class GameController : MonoBehaviour {
     private IEnumerator spawnBird() {
         GameObject bird;
         while (true) {
-            bird = Instantiate(CrowPrefab);
+            bird = Instantiate(CrowPrefab, Birds.transform);
             Vector3 spawn = Random.onUnitSphere * SpawnDistance;
             if (spawn.y < 0) {
                 spawn.y = -spawn.y;

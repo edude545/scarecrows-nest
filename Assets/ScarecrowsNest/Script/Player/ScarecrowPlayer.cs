@@ -35,7 +35,7 @@ public class ScarecrowPlayer : MonoBehaviour
     private void Update() {
         if (Input.GetKeyDown("space")) {
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Bird")) {
-                obj.GetComponent<Crow>().Spook(DebugSpookAmount);
+                obj.GetComponent<Bird>().Spook(DebugSpookAmount);
             }
         }
     }
@@ -87,10 +87,7 @@ public class ScarecrowPlayer : MonoBehaviour
             }
         }
 
-        foreach (GameObject obj in GameController.Instance.SeedBags)
-        {
-            obj.SetActive(true);
-        }
+        GameController.Instance.SeedBags.SetActive(false);
 
         Debug.Log("Farmer mode: " + FarmerMode);
     }

@@ -9,10 +9,14 @@ public class Seed : MonoBehaviour
 {
 
     public Plant PlantType;
-
-    private void Update()
+    public void OnAttach()
     {
-        
+        Debug.Log("Seed attached successfully");
+    }
+
+    public void OnDetach()
+    {
+        Debug.Log("Seed detached!");
     }
 
 }

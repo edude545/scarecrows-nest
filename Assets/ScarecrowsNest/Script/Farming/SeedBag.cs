@@ -9,7 +9,8 @@ public class SeedBag : UIElement
 
     public Plant PlantType;
     public GameObject SeedPrefab;
-
+    //public GameObject seed;
+    private bool seedAttached = false;
     public void SpawnSeed(Hand hand)
     {
         if (hand == null)
@@ -18,7 +19,7 @@ public class SeedBag : UIElement
         } else
         {
             GameObject seed = Instantiate(SeedPrefab);
-            hand.AttachObject(seed, GrabTypes.Scripted);
+            hand.AttachObject(seed, GrabTypes.Trigger);
         }
     }
 

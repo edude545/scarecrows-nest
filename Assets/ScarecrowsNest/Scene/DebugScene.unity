@@ -213,7 +213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7657408497578943720, guid: 5721eebee101ed8418b8e66d2c7785e6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.527
+      value: 0.116
       objectReference: {fileID: 0}
     - target: {fileID: 7657408497578943720, guid: 5721eebee101ed8418b8e66d2c7785e6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -221,7 +221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7657408497578943720, guid: 5721eebee101ed8418b8e66d2c7785e6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.274
+      value: 0.617
       objectReference: {fileID: 0}
     - target: {fileID: 7657408497578943720, guid: 5721eebee101ed8418b8e66d2c7785e6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -251,6 +251,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7657408497578943721, guid: 5721eebee101ed8418b8e66d2c7785e6, type: 3}
+      propertyPath: seed
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657408497578943721, guid: 5721eebee101ed8418b8e66d2c7785e6, type: 3}
+      propertyPath: PlantType
+      value: 
+      objectReference: {fileID: 11400000, guid: 8fc7c65b60b75b646a2bb1ec00bd50f8, type: 2}
     - target: {fileID: 7657408497578943735, guid: 5721eebee101ed8418b8e66d2c7785e6, type: 3}
       propertyPath: m_Name
       value: SeedBag

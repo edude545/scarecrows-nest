@@ -71,6 +71,20 @@ public class Crop : MonoBehaviour
             PlantedSeeds++;
             UpdateText();
         }
+        if (PlantedSeeds == PlantType.RequiredSeeds)
+        {
+            OnCropPlanted();
+        }
+    }
+
+    protected void OnCropPlanted()
+    {
+        transform.parent = GameController.Instance.LiveCrops.transform;
+    }
+
+    public void OnCropKilled()
+    {
+        transform.parent = GameController.Instance.DeadCrops.transform;
     }
 
     protected void UpdateText()

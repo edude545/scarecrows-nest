@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
+using Valve.VR.InteractionSystem;
 
 public class GameController : MonoBehaviour {
     public static GameController Instance;
@@ -10,6 +11,7 @@ public class GameController : MonoBehaviour {
     public GameObject BasicCropPrefab;
 
     public float WaggleScoreMultiplier = 0.25f;
+    public float DebugSpookAmount = 0.2f;
     public float SpawnInterval = 3f;
 
     public float SpawnDistance = 100f;
@@ -19,6 +21,13 @@ public class GameController : MonoBehaviour {
     public GameObject RightHand;
     public GameObject Head;
 
+    public GameObject LeftHandModelPrefabScarecrow;
+    public GameObject RightHandModelPrefabScarecrow;
+    public GameObject LeftHandModelPrefabFarmer;
+    public GameObject RightHandModelPrefabFarmer;
+
+    public AudioClip[] AmbientSFX;
+
     public GameObject LiveCrops;
     public GameObject DeadCrops;
     public GameObject SeedBags;
@@ -26,10 +35,10 @@ public class GameController : MonoBehaviour {
 
     public Dictionary<string, int> Resources = new Dictionary<string, int>();
 
-    GameState gameState = GameState.Farm;
+    public GameStates GameState = GameStates.Farm;
     float roundTimer = 0f; // seconds
-    float roundEndTime = 5f;
-
+    public float RoundEndTime = 5f;
+    
     public static float LeftArmExtension;
     public static float RightArmExtension;
     public static Vector3 LeftHandLastPos;
@@ -41,7 +50,7 @@ public class GameController : MonoBehaviour {
     public bool VRFallback = false;
     public Canvas UICanvasPrefab;
 
-    enum GameState {
+    public enum GameStates {
         Farm, // Allow player to plant seeds
         Shop, // Allow player to buy upgrades
         Scarecrow, // Spawn birds
@@ -71,43 +80,77 @@ public class GameController : MonoBehaviour {
 
     private void Update()
     {
-        if (gameState == GameState.Scarecrow) {
+        if (Input.GetKeyDown("space"))
+        {
+            for (int i = 0; i < Birds.transform.childCount; i++)
+            {
+                Birds.transform.GetChild(i).GetComponent<Bird>().Spook(DebugSpookAmount);
+            }
+        }
+        if (GameState == GameStates.Scarecrow) {
             calculateWaggle();
             roundTimer += Time.deltaTime;
-            if (roundTimer >= roundEndTime || Input.GetKeyDown("c")) {
-                Debug.Log("Scarecrow phase ending...");
-                changeGameState(GameState.ScarecrowEnd);
+            if (roundTimer >= RoundEndTime || Input.GetKeyDown("c")) {
+                ChangeGameState(GameStates.ScarecrowEnd);
             }
-        } else if (gameState == GameState.ScarecrowEnd) {
+        } else if (GameState == GameStates.ScarecrowEnd) {
             calculateWaggle();
             if (Birds.transform.childCount == 0) {
-                Debug.Log("Entering farm phase");
-                changeGameState(GameState.Farm);
+                ChangeGameState(GameStates.Farm);
             }
-        } else if (gameState == GameState.Farm) {
+        } else if (GameState == GameStates.Farm) {
             if (Input.GetKeyDown("m")) {
-                Debug.Log("Switched to shop phase");
-                changeGameState(GameState.Shop);
+                ChangeGameState(GameStates.Shop);
             } else if (Input.GetKeyDown("c")) {
-                Debug.Log("Scarecrow phase beginning");
-                changeGameState(GameState.Scarecrow);
+                ChangeGameState(GameStates.Scarecrow);
             }
-        } else if (gameState == GameState.Shop) {
+        } else if (GameState == GameStates.Shop) {
             if (Input.GetKeyDown("m")) {
-                Debug.Log("Switched to farm phase");
-                changeGameState(GameState.Farm);
+                ChangeGameState(GameStates.Farm);
             }
         }
     }
 
-    private void changeGameState(GameState gs) {
-        gameState = gs;
-        if (gameState == GameState.Scarecrow) {
+    public void ChangeGameState(GameStates gs) {
+        GameState = gs;
+        if (GameState == GameStates.Scarecrow) {
+            roundTimer = 0f;
             StartCoroutine(spawnBird());
-        } else if (gameState == GameState.ScarecrowEnd) {
-        } else if (gameState == GameState.Farm) {
-        } else if (gameState == GameState.Shop) {
+            if (!VRFallback)
+            {
+                LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabScarecrow);
+                RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabScarecrow);
+            }
+            Debug.Log("Scarecrow phase beginning");
+        } else if (GameState == GameStates.ScarecrowEnd) {
+            Debug.Log("Scarecrow phase ending...");
+        } else if (GameState == GameStates.Farm) {
+            Debug.Log("Entering farm phase");
+            if (!VRFallback)
+            {
+                LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabFarmer);
+                RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabFarmer);
+            }
+            SeedBags.SetActive(true);
+        } else if (GameState == GameStates.Shop) {
+            Debug.Log("Moving to shop");
         }
+    }
+
+    public void DebugToggleMode()
+    {
+        switch (GameState)
+        {
+            case GameStates.Scarecrow: ChangeGameState(GameStates.ScarecrowEnd); break;
+            case GameStates.ScarecrowEnd: break;
+            case GameStates.Farm: case GameStates.Shop: ChangeGameState(GameStates.Scarecrow); break;
+        }
+    }
+
+    // Used in ScarecrowPlayer
+    public void DebugToggleMode(SteamVR_Action_Boolean action, SteamVR_Input_Sources source)
+    {
+        DebugToggleMode();
     }
 
     private void calculateWaggle() {
@@ -136,16 +179,22 @@ public class GameController : MonoBehaviour {
     private IEnumerator spawnBird() {
         GameObject bird;
         while (true) {
-            bird = Instantiate(CrowPrefab, Birds.transform);
-            Vector3 spawn = Random.onUnitSphere * SpawnDistance;
-            if (spawn.y < 0) {
-                spawn.y = -spawn.y;
+            if (GameState == GameStates.Scarecrow) {
+                bird = Instantiate(CrowPrefab, Birds.transform);
+                Vector3 spawn = Random.onUnitSphere * SpawnDistance;
+                if (spawn.y < 0)
+                {
+                    spawn.y = -spawn.y;
+                }
+                if (spawn.y < 10)
+                {
+                    spawn.y = 10;
+                }
+                bird.transform.position = spawn;
+                yield return new WaitForSeconds(SpawnInterval);
+            } else {
+                yield return null;
             }
-            if (spawn.y < 10) {
-                spawn.y = 10;
-            }
-            bird.transform.position = spawn;
-            yield return new WaitForSeconds(SpawnInterval);
         }
     }
 

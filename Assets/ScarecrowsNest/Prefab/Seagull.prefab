@@ -52,10 +52,12 @@ MonoBehaviour:
   CorrectionWeight: 0.5
   animator: {fileID: 8287387821083864779}
   Target: {fileID: 0}
+  IsAggressive: 1
+  FavoritePlant: {fileID: 0}
   Fear: 0
   Fleeing: 0
   DespawnRange: 200
-  FleeSpeed: 3
+  FleeSpeed: 10
   Velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &555484921629823196
 MonoBehaviour:

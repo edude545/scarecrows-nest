@@ -8,20 +8,11 @@ using Valve.VR.InteractionSystem;
 public class ScarecrowPlayer : MonoBehaviour
 {
 
-    public bool FarmerMode = true;
-
     BeltObject heldObject;
 
     public SteamVR_Action_Boolean DebugModeToggle;
 
-    public GameObject LeftHandModelPrefabScarecrow;
-    public GameObject RightHandModelPrefabScarecrow;
-    public GameObject LeftHandModelPrefabFarmer;
-    public GameObject RightHandModelPrefabFarmer;
-
     protected Crop SelectedCrop;
-
-    public float DebugSpookAmount = 0.2f;
 
     private void Start()
     {
@@ -29,15 +20,7 @@ public class ScarecrowPlayer : MonoBehaviour
         laser.PointerIn += PointerInside;
         laser.PointerOut += PointerOutside;
         laser.PointerClick += PointerClick;*/
-        DebugModeToggle.AddOnStateUpListener(debugToggleMode, SteamVR_Input_Sources.RightHand);
-    }
-
-    private void Update() {
-        if (Input.GetKeyDown("space")) {
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Bird")) {
-                obj.GetComponent<Bird>().Spook(DebugSpookAmount);
-            }
-        }
+        DebugModeToggle.AddOnStateUpListener(GameController.Instance.DebugToggleMode, SteamVR_Input_Sources.RightHand);
     }
 
     /*public void PointerClick(object sender, PointerEventArgs ev)
@@ -66,31 +49,5 @@ public class ScarecrowPlayer : MonoBehaviour
             crop.OnPointerExit();
         }
     }*/
-
-    protected void debugToggleMode(SteamVR_Action_Boolean action, SteamVR_Input_Sources source)
-    {
-        if (FarmerMode)
-        {
-            FarmerMode = false;
-            //RightHand.GetComponent<SteamVR_LaserPointer>().active = false;
-            if (!GameController.Instance.VRFallback) {
-                GameController.Instance.LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabScarecrow);
-                GameController.Instance.RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabScarecrow);
-            }
-        } else
-        {
-            FarmerMode = true;
-            //RightHand.GetComponent<SteamVR_LaserPointer>().active = true;
-            if (!GameController.Instance.VRFallback) {
-                GameController.Instance.LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabFarmer);
-                GameController.Instance.RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabFarmer);
-            }
-        }
-
-        GameController.Instance.SeedBags.SetActive(false);
-
-        Debug.Log("Farmer mode: " + FarmerMode);
-    }
-
 
 }

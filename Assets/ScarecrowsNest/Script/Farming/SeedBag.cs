@@ -9,8 +9,6 @@ public class SeedBag : UIElement
 
     public Plant PlantType;
     public GameObject SeedPrefab;
-    //public GameObject seed;
-    private bool seedAttached = false;
     public void SpawnSeed(Hand hand)
     {
         if (hand == null)

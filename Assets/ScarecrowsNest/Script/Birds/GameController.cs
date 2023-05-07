@@ -96,6 +96,7 @@ public class GameController : MonoBehaviour {
         } else if (GameState == GameStates.ScarecrowEnd) {
             calculateWaggle();
             if (Birds.transform.childCount == 0) {
+                onCycleEnd();
                 ChangeGameState(GameStates.Farm);
             }
         } else if (GameState == GameStates.Farm) {
@@ -116,8 +117,7 @@ public class GameController : MonoBehaviour {
         if (GameState == GameStates.Scarecrow) {
             roundTimer = 0f;
             StartCoroutine(spawnBird());
-            if (!VRFallback)
-            {
+            if (!VRFallback) {
                 LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabScarecrow);
                 RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabScarecrow);
             }
@@ -126,8 +126,7 @@ public class GameController : MonoBehaviour {
             Debug.Log("Scarecrow phase ending...");
         } else if (GameState == GameStates.Farm) {
             Debug.Log("Entering farm phase");
-            if (!VRFallback)
-            {
+            if (!VRFallback) {
                 LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabFarmer);
                 RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabFarmer);
             }
@@ -137,10 +136,8 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public void DebugToggleMode()
-    {
-        switch (GameState)
-        {
+    public void DebugToggleMode() {
+        switch (GameState) {
             case GameStates.Scarecrow: ChangeGameState(GameStates.ScarecrowEnd); break;
             case GameStates.ScarecrowEnd: break;
             case GameStates.Farm: case GameStates.Shop: ChangeGameState(GameStates.Scarecrow); break;
@@ -148,28 +145,29 @@ public class GameController : MonoBehaviour {
     }
 
     // Used in ScarecrowPlayer
-    public void DebugToggleMode(SteamVR_Action_Boolean action, SteamVR_Input_Sources source)
-    {
+    public void DebugToggleMode(SteamVR_Action_Boolean action, SteamVR_Input_Sources source) {
         DebugToggleMode();
     }
 
     private void calculateWaggle() {
-        LeftHandPosDelta = (LeftHandLastPos - LeftHand.transform.position).magnitude;
         RightHandPosDelta = (RightHandLastPos - RightHand.transform.position).magnitude;
-        LeftHandLastPos = LeftHand.transform.position;
         RightHandLastPos = RightHand.transform.position;
-        LeftArmExtension = (Head.transform.position - LeftHand.transform.position).magnitude;
         RightArmExtension = (Head.transform.position - RightHand.transform.position).magnitude;
-        WaggleScore = Mathf.Clamp01(LeftHandPosDelta + RightHandPosDelta) * WaggleScoreMultiplier;
+        if (!VRFallback) {
+            LeftHandPosDelta = (LeftHandLastPos - LeftHand.transform.position).magnitude;
+            LeftArmExtension = (Head.transform.position - LeftHand.transform.position).magnitude;
+            LeftHandLastPos = LeftHand.transform.position;
+            WaggleScore = Mathf.Clamp01(LeftHandPosDelta + RightHandPosDelta) * WaggleScoreMultiplier;
+        } else {
+            WaggleScore = Mathf.Clamp01(RightHandPosDelta * 2) * WaggleScoreMultiplier;
+        }
     }
 
     private void onCycleEnd() {
-        for (int i = 0; i < LiveCrops.transform.childCount; i++)
-        {
+        for (int i = 0; i < LiveCrops.transform.childCount; i++) {
             Crop crop = LiveCrops.transform.GetChild(i).GetComponent<Crop>();
             int yield = crop.OnCycleEnd();
-            if (yield > 0)
-            {
+            if (yield > 0) {
                 int n = Resources.ContainsKey(crop.PlantType.Name) ? Resources[crop.PlantType.Name] : 0;
                 Resources[crop.PlantType.Name] = n + yield;
             }
@@ -182,12 +180,10 @@ public class GameController : MonoBehaviour {
             if (GameState == GameStates.Scarecrow) {
                 bird = Instantiate(CrowPrefab, Birds.transform);
                 Vector3 spawn = Random.onUnitSphere * SpawnDistance;
-                if (spawn.y < 0)
-                {
+                if (spawn.y < 0) {
                     spawn.y = -spawn.y;
                 }
-                if (spawn.y < 10)
-                {
+                if (spawn.y < 10) {
                     spawn.y = 10;
                 }
                 bird.transform.position = spawn;

@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wheat
   RequiredSeeds: 3
+  MaxHP: 3
+  GrowthTime: 1
+  MinYield: 2
+  MaxYield: 4

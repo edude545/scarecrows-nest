@@ -53,7 +53,7 @@ MonoBehaviour:
   animator: {fileID: 8287387821083864779}
   Target: {fileID: 0}
   IsAggressive: 1
-  FavoritePlant: {fileID: 0}
+  FavoritePlant: {fileID: 11400000, guid: 8fc7c65b60b75b646a2bb1ec00bd50f8, type: 2}
   Fear: 0
   Fleeing: 0
   DespawnRange: 200

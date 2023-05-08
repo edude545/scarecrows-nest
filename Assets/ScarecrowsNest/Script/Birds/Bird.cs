@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bird : MonoBehaviour {
@@ -18,30 +19,71 @@ public class Bird : MonoBehaviour {
     public float Fear = 0f;
     public bool Fleeing = false;
 
+    public float InteractRange = 2f;
     public float DespawnRange = 200f;
     public float FleeSpeed = 20f;
 
     public Vector3 Velocity;
 
-    private void Start() {
-        findTarget();
-        beginFlight();
+    public States State;
+
+    public enum States {
+        Flying,
+        Eating,
+        Attacking,
+        Fleeing
+    }
+
+    public void ChangeState(States state) {
+        State = state;
+        if (state == States.Flying) {
+            animator.SetBool("airborne", true);
+            animator.SetBool("moving", true);
+            animator.SetBool("attacking", false);
+            animator.SetBool("eating", false);
+            findTarget();
+        } else if (state == States.Eating) {
+            animator.SetBool("airborne", false);
+            animator.SetBool("moving", false);
+            animator.SetBool("attacking", false);
+            animator.SetBool("eating", true);
+        } else if (state == States.Attacking) {
+            animator.SetBool("airborne", true);
+            animator.SetBool("moving", false);
+            animator.SetBool("attacking", true);
+            animator.SetBool("eating", false);
+        } else if (state == States.Fleeing) {
+
+        }
     }
 
     private void Update() {
-        Velocity = (Target.transform.position - transform.position).normalized * FlySpeed * (Fleeing ? -FleeSpeed : 1);
-        transform.position += Velocity;
+        if (State == States.Flying) {
+            Velocity = (Target.transform.position - transform.position).normalized * FlySpeed * (Fleeing ? -FleeSpeed : 1);
+            transform.position += Velocity;
+            if ((transform.position - Target.transform.position).magnitude <= InteractRange) {
+                if (Target.Equals(GameController.Instance.Player)) {
+                    ChangeState(States.Attacking);
+                } else {
+                    ChangeState(States.Eating);
+                }
+            }
+            if (Velocity.magnitude > 0.01f) {
+                transform.rotation = Quaternion.LookRotation(Velocity);
+            }
+        } else if (State == States.Eating) {
+
+        } else if (State == States.Attacking) {
+
+        } else if (state == States.Fleeing) {
+
+        }
 
         if (transform.position.magnitude > DespawnRange) {
             Destroy(gameObject);
         }
 
-        if (Velocity.magnitude > 0.01f) {
-            transform.rotation = Quaternion.LookRotation(Velocity);
-        }
-
         Spook(GameController.WaggleScore);
-
         Fear = Mathf.Max(Fear - FearDecay, 0);
     }
 
@@ -60,13 +102,6 @@ public class Bird : MonoBehaviour {
             WeightedRandom<Crop> crops = new WeightedRandom<Crop>(weights, values);
             Target = crops.Choose().gameObject;
         }
-    }
-
-    void beginFlight() {
-        animator.SetBool("airborne", true);
-        animator.SetBool("moving", true);
-        animator.SetBool("attacking", false);
-        animator.SetBool("eating", false);
     }
 
     public void Spook(float f) {

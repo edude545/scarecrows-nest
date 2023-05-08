@@ -28,10 +28,9 @@ public class GameController : MonoBehaviour {
 
     public AudioClip[] AmbientSFX;
 
-    public GameObject LiveCrops;
-    public GameObject DeadCrops;
-    public GameObject SeedBags;
-    public GameObject Birds;
+    public Transform LiveCrops;
+    public Transform DeadCrops;
+    public Transform Birds;
 
     public Dictionary<string, int> Resources = new Dictionary<string, int>();
 
@@ -49,6 +48,18 @@ public class GameController : MonoBehaviour {
 
     public bool VRFallback = false;
     public Canvas UICanvasPrefab;
+
+    // --- Player attributes
+    public Transform farmerBeltItems;
+    public Transform scarecrowBeltItems;
+    BeltObject leftHeldObject;
+    BeltObject rightHeldObject;
+
+    public SteamVR_Action_Boolean DebugModeToggle;
+    public SteamVR_Action_Single UseHeldObject;
+
+    protected Crop SelectedCrop;
+    // ---
 
     public enum GameStates {
         Farm, // Allow player to plant seeds
@@ -76,6 +87,10 @@ public class GameController : MonoBehaviour {
         }
         canv.worldCamera = Head.GetComponent<Camera>();
         canv.planeDistance = 0.5f;
+
+        DebugModeToggle.AddOnStateUpListener(DebugToggleMode, SteamVR_Input_Sources.RightHand);
+        UseHeldObject.AddOnAxisListener(UseHeldItemLeft, SteamVR_Input_Sources.LeftHand);
+        UseHeldObject.AddOnAxisListener(UseHeldItemRight, SteamVR_Input_Sources.RightHand);
     }
 
     private void Update()
@@ -115,6 +130,8 @@ public class GameController : MonoBehaviour {
     public void ChangeGameState(GameStates gs) {
         GameState = gs;
         if (GameState == GameStates.Scarecrow) {
+            farmerBeltItems.gameObject.SetActive(false);
+            scarecrowBeltItems.gameObject.SetActive(true);
             roundTimer = 0f;
             StartCoroutine(spawnBird());
             if (!VRFallback) {
@@ -126,11 +143,12 @@ public class GameController : MonoBehaviour {
             Debug.Log("Scarecrow phase ending...");
         } else if (GameState == GameStates.Farm) {
             Debug.Log("Entering farm phase");
+            farmerBeltItems.gameObject.SetActive(true);
+            scarecrowBeltItems.gameObject.SetActive(false);
             if (!VRFallback) {
                 LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabFarmer);
                 RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabFarmer);
             }
-            SeedBags.SetActive(true);
         } else if (GameState == GameStates.Shop) {
             Debug.Log("Moving to shop");
         }
@@ -144,9 +162,41 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    // Used in ScarecrowPlayer
+    // value should be between 0 and 1
+    public void UseHeldItem(float triggerValue, bool rightHand) {
+        BeltObject obj = rightHand ? rightHeldObject : leftHeldObject;
+        if (obj == null) { return; }
+        obj.Use(triggerValue);
+    }
+
+    // --- SteamVR input methods. Listeners are added for these in Start.
     public void DebugToggleMode(SteamVR_Action_Boolean action, SteamVR_Input_Sources source) {
         DebugToggleMode();
+    }
+    private void UseHeldItemLeft(SteamVR_Action_Single action, SteamVR_Input_Sources source, float newAxis, float newDelta) {
+        UseHeldItem(newAxis, false);
+    }
+    private void UseHeldItemRight(SteamVR_Action_Single action, SteamVR_Input_Sources source, float newAxis, float newDelta) {
+        UseHeldItem(newAxis, true);
+    }
+    // ---
+
+    public void OnBeltObjectAttached(BeltObject obj, Hand hand) {
+        if (hand.handType == SteamVR_Input_Sources.LeftHand) {
+            leftHeldObject = obj;
+        } else if (hand.handType == SteamVR_Input_Sources.RightHand) {
+            rightHeldObject = obj;
+        } else {
+            Debug.Log("iurfrehrg");
+        }
+    }
+
+    public void OnBeltObjectDetached(Hand hand) {
+        if (hand.handType == SteamVR_Input_Sources.LeftHand) {
+            leftHeldObject = null;
+        } else if (hand.handType == SteamVR_Input_Sources.RightHand) {
+            rightHeldObject = null;
+        }
     }
 
     private void calculateWaggle() {

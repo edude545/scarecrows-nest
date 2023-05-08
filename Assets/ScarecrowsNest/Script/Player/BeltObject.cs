@@ -6,8 +6,6 @@ using Valve.VR.InteractionSystem;
 public class BeltObject : Throwable
 {
 
-    public ScarecrowPlayer Player;
-
     protected Vector3 beltSnapPos;
     protected Quaternion beltSnapRot;
 
@@ -18,20 +16,29 @@ public class BeltObject : Throwable
         beltSnapRot = transform.rotation;
     }
 
+    public void Use(float triggerValue) {
+        Debug.Log("Used " + name + "!");
+    }
+
     protected override void OnAttachedToHand(Hand hand)
     {
         base.OnAttachedToHand(hand);
         transform.localRotation = Quaternion.identity;
         attachRotation = Quaternion.identity;
+        GameController.Instance.OnBeltObjectAttached(this, hand);
     }
 
     protected override void OnDetachedFromHand(Hand hand)
     {
+        // Original code
         attached = false;
         onDetachFromHand.Invoke();
         hand.HoverUnlock(null);
+        //
+
         transform.position = beltSnapPos;
         transform.rotation = beltSnapRot;
+        GameController.Instance.OnBeltObjectDetached(hand);
     }
 
 }

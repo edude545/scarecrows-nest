@@ -93,6 +93,7 @@ public class GameController : MonoBehaviour {
         UseHeldObject.AddOnAxisListener(UseHeldItemRight, SteamVR_Input_Sources.RightHand);
     }
 
+    public Plant Wheat;
     private void Update()
     {
         if (Input.GetKeyDown("space"))
@@ -119,6 +120,16 @@ public class GameController : MonoBehaviour {
                 ChangeGameState(GameStates.Shop);
             } else if (Input.GetKeyDown("c")) {
                 ChangeGameState(GameStates.Scarecrow);
+            }
+            if (Input.GetKeyDown("l")) {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit rayHit;
+                if (Physics.Raycast(ray, out rayHit)) {
+                    Planter planter = rayHit.transform.gameObject.GetComponent<Planter>();
+                    if (planter != null) {
+                        planter.Crop.ReceiveSeed(Wheat);
+                    }
+                }
             }
         } else if (GameState == GameStates.Shop) {
             if (Input.GetKeyDown("m")) {
@@ -199,6 +210,12 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    public void AddResource(Plant PlantType, int amount) {
+        int n = Resources.ContainsKey(PlantType.Name) ? Resources[PlantType.Name] : 0;
+        Resources[PlantType.Name] = n + amount;
+        Debug.Log("Got resource: " + Resources[PlantType.Name]);
+    }
+
     private void calculateWaggle() {
         RightHandPosDelta = (RightHandLastPos - RightHand.transform.position).magnitude;
         RightHandLastPos = RightHand.transform.position;
@@ -216,11 +233,7 @@ public class GameController : MonoBehaviour {
     private void onCycleEnd() {
         for (int i = 0; i < LiveCrops.transform.childCount; i++) {
             Crop crop = LiveCrops.transform.GetChild(i).GetComponent<Crop>();
-            int yield = crop.OnCycleEnd();
-            if (yield > 0) {
-                int n = Resources.ContainsKey(crop.PlantType.Name) ? Resources[crop.PlantType.Name] : 0;
-                Resources[crop.PlantType.Name] = n + yield;
-            }
+            crop.OnCycleEnd();
         }
     }
 

@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3fb6cf561bef4941bdeb73f6a830807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Crop: {fileID: 0}
 --- !u!114 &250634843 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3997552016530050990, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
@@ -555,6 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3fb6cf561bef4941bdeb73f6a830807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Crop: {fileID: 0}
 --- !u!4 &775824711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8846471953141418033, guid: adf1d9b9a2bdcdb4dbe7a870bd5f6069, type: 3}
@@ -582,6 +584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3fb6cf561bef4941bdeb73f6a830807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Crop: {fileID: 0}
 --- !u!4 &1043212922 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8493778444750519343, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
@@ -604,6 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3fb6cf561bef4941bdeb73f6a830807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Crop: {fileID: 0}
 --- !u!1001 &1119433816
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1205,6 +1209,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1865947711}
     - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
+      propertyPath: Wheat
+      value: 
+      objectReference: {fileID: 11400000, guid: 8fc7c65b60b75b646a2bb1ec00bd50f8, type: 2}
+    - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 1143382911}
@@ -1230,7 +1238,11 @@ PrefabInstance:
       objectReference: {fileID: 8750348635730674431, guid: 4ef0f65a38b2c944f93edd2dc82b5857, type: 3}
     - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
       propertyPath: VRFallback
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
+      propertyPath: RoundEndTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
       propertyPath: SpawnInterval

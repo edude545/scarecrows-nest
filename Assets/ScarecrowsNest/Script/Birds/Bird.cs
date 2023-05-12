@@ -9,7 +9,7 @@ public class Bird : MonoBehaviour {
     public float FlySpeed = 0.01f;
     public float Braveness = 1f;
     public float FearDecay = 0.002f;
-    public float VisualContactAngle = 30f;
+    [Range(0,360)] public float VisualContactAngle = 30f;
     public float CorrectionWeight = 0.5f;
     public Animator animator;
 
@@ -89,12 +89,12 @@ public class Bird : MonoBehaviour {
         }
 
         var angle = Mathf.Clamp(VisualContactAngle-Vector3.Angle(Camera.main.transform.rotation * Vector3.forward, transform.position - Camera.main.transform.position), 0, VisualContactAngle);
-        Spook(GameController.WaggleScore * (1+Mathf.InverseLerp(0, VisualContactAngle, angle)));
+        Spook(GameController.WaggleScore * (0.3f+Mathf.InverseLerp(0, VisualContactAngle, angle)));
         Fear = Mathf.Max(Fear - FearDecay, 0);
     }
 
     void findTarget() {
-        if (IsAggressive) {
+        if (IsAggressive || GameController.Instance.LiveCrops.childCount == 0) {
             Target = GameController.Instance.Player;
         } else { // Birds are 3 times more likely to choose their favorite crop, and less likely to choose damaged crops.
             float[] weights = new float[GameController.Instance.LiveCrops.transform.childCount];

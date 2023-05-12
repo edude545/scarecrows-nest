@@ -18,7 +18,7 @@ public class Planter : MonoBehaviour
         if (seed != null)
         {
             Crop.ReceiveSeed(seed.PlantType);
-            Destroy(seed.gameObject);
+            seed.ResetSeed();
         }
     }
 

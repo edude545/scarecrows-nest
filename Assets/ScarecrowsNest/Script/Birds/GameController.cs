@@ -10,7 +10,8 @@ public class GameController : MonoBehaviour {
     public GameObject CrowPrefab;
     public GameObject BasicCropPrefab;
 
-    public float WaggleScoreMultiplier = 0.25f;
+    public float WaggleScoreMultiplier = 1f;
+    [Range(0,1)] public float ArmExtensionImportance = 0.5f;
     public float DebugSpookAmount = 0.2f;
     public float SpawnInterval = 3f;
 
@@ -42,16 +43,16 @@ public class GameController : MonoBehaviour {
     public static float RightArmExtension;
     public static Vector3 LeftHandLastPos;
     public static Vector3 RightHandLastPos;
-    public static float LeftHandPosDelta;
-    public static float RightHandPosDelta;
+    public static float LeftHandWaggleScore;
+    public static float RightHandWaggleScore;
     public static float WaggleScore;
 
     public bool VRFallback = false;
     public Canvas UICanvasPrefab;
 
     // --- Player attributes
-    public Transform farmerBeltItems;
-    public Transform scarecrowBeltItems;
+    public Transform FarmerBeltItems;
+    public Transform ScarecrowBeltItems;
     BeltObject leftHeldObject;
     BeltObject rightHeldObject;
 
@@ -141,8 +142,8 @@ public class GameController : MonoBehaviour {
     public void ChangeGameState(GameStates gs) {
         GameState = gs;
         if (GameState == GameStates.Scarecrow) {
-            farmerBeltItems.gameObject.SetActive(false);
-            scarecrowBeltItems.gameObject.SetActive(true);
+            FarmerBeltItems.gameObject.SetActive(false);
+            ScarecrowBeltItems.gameObject.SetActive(true);
             roundTimer = 0f;
             StartCoroutine(spawnBird());
             if (!VRFallback) {
@@ -154,13 +155,15 @@ public class GameController : MonoBehaviour {
             Debug.Log("Scarecrow phase ending...");
         } else if (GameState == GameStates.Farm) {
             Debug.Log("Entering farm phase");
-            farmerBeltItems.gameObject.SetActive(true);
-            scarecrowBeltItems.gameObject.SetActive(false);
+            FarmerBeltItems.gameObject.SetActive(true);
+            ScarecrowBeltItems.gameObject.SetActive(false);
             if (!VRFallback) {
                 LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabFarmer);
                 RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabFarmer);
             }
         } else if (GameState == GameStates.Shop) {
+            FarmerBeltItems.gameObject.SetActive(false);
+            ScarecrowBeltItems.gameObject.SetActive(false);
             Debug.Log("Moving to shop");
         }
     }
@@ -213,20 +216,22 @@ public class GameController : MonoBehaviour {
     public void AddResource(Plant PlantType, int amount) {
         int n = Resources.ContainsKey(PlantType.Name) ? Resources[PlantType.Name] : 0;
         Resources[PlantType.Name] = n + amount;
-        Debug.Log("Got resource: " + Resources[PlantType.Name]);
+        Debug.Log("Got "+amount+" "+PlantType.name);
     }
 
     private void calculateWaggle() {
-        RightHandPosDelta = (RightHandLastPos - RightHand.transform.position).magnitude;
+        RightHandWaggleScore = Mathf.Clamp((RightHandLastPos - RightHand.transform.position).magnitude, 0, 0.03f)
+                             * (RightArmExtension * ArmExtensionImportance + 1 - ArmExtensionImportance);
         RightHandLastPos = RightHand.transform.position;
         RightArmExtension = (Head.transform.position - RightHand.transform.position).magnitude;
         if (!VRFallback) {
-            LeftHandPosDelta = (LeftHandLastPos - LeftHand.transform.position).magnitude;
+            LeftHandWaggleScore = Mathf.Clamp((LeftHandLastPos - LeftHand.transform.position).magnitude, 0f, 0.03f)
+                                * (LeftArmExtension * ArmExtensionImportance + 1 - ArmExtensionImportance);
             LeftArmExtension = (Head.transform.position - LeftHand.transform.position).magnitude;
             LeftHandLastPos = LeftHand.transform.position;
-            WaggleScore = Mathf.Clamp01(LeftHandPosDelta + RightHandPosDelta) * WaggleScoreMultiplier;
+            WaggleScore = (RightHandWaggleScore + LeftHandWaggleScore) * WaggleScoreMultiplier;
         } else {
-            WaggleScore = Mathf.Clamp01(RightHandPosDelta * 2) * WaggleScoreMultiplier;
+            WaggleScore = RightHandWaggleScore * 2 * WaggleScoreMultiplier;
         }
     }
 

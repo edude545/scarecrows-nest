@@ -17,9 +17,9 @@ public class WaggleMeter : MonoBehaviour
     {
         LeftDistanceMeter.transform.localScale = new Vector3(1, GameController.LeftArmExtension, 1);
         RightDistanceMeter.transform.localScale = new Vector3(1, GameController.RightArmExtension, 1);
-        LeftWaggleMeter.transform.localScale = new Vector3(1, GameController.LeftHandPosDelta * GameController.LeftHandPosDelta * 1024, 1);
-        RightWaggleMeter.transform.localScale = new Vector3(1, GameController.RightHandPosDelta * GameController.RightHandPosDelta * 1024, 1);
-        TextDisplay.text = GameController.LeftHandPosDelta + "   " + GameController.WaggleScore + "   " + GameController.RightHandPosDelta;
+        LeftWaggleMeter.transform.localScale = new Vector3(1, GameController.LeftHandWaggleScore * 128, 1);
+        RightWaggleMeter.transform.localScale = new Vector3(1, GameController.RightHandWaggleScore * 128, 1);
+        TextDisplay.text = GameController.LeftHandWaggleScore + "\n" + GameController.WaggleScore + "\n" + GameController.RightHandWaggleScore;
     }
 
 }

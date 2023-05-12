@@ -16,8 +16,7 @@ public class BeltObject : Throwable
         beltSnapRot = transform.rotation;
     }
 
-    public void Use(float triggerValue) {
-        Debug.Log("Used " + name + "!");
+    public virtual void Use(float triggerValue) {
     }
 
     protected override void OnAttachedToHand(Hand hand)

@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8010415739571471473
 MonoBehaviour:
@@ -44,4 +44,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 768944066b989b749a7338d014165064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CrowPrefab: {fileID: 2883776376815843897, guid: b84bbfbc18c863e4fb257b43f5eb368b, type: 3}
+  CrowPrefab: {fileID: 8750348635730674431, guid: 4ef0f65a38b2c944f93edd2dc82b5857, type: 3}
+  BasicCropPrefab: {fileID: 4057173121076226666, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
+  WaggleScoreMultiplier: 0.25
+  DebugSpookAmount: 0.2
+  SpawnInterval: 1.59
+  SpawnDistance: 100
+  Player: {fileID: 0}
+  LeftHand: {fileID: 0}
+  RightHand: {fileID: 0}
+  Head: {fileID: 0}
+  LeftHandModelPrefabScarecrow: {fileID: 1000011547835092, guid: d8d1e5711b2c77d48ac96e769aaff27a, type: 3}
+  RightHandModelPrefabScarecrow: {fileID: 1000012617731570, guid: b3cb7e5f55e66cb40aea59db72c62365, type: 3}
+  LeftHandModelPrefabFarmer: {fileID: 1000011547835092, guid: d5082f7d9f947374197e0a97786f4e40, type: 3}
+  RightHandModelPrefabFarmer: {fileID: 1000012617731570, guid: 837f93beb9a614743ae3a2c0ada7c388, type: 3}
+  AmbientSFX: []
+  LiveCrops: {fileID: 0}
+  DeadCrops: {fileID: 0}
+  Birds: {fileID: 0}
+  GameState: 0
+  RoundEndTime: 1
+  VRFallback: 0
+  UICanvasPrefab: {fileID: 1797254991410841072, guid: cc669f7f5dd22a54da9ca8c3d23fbaa6, type: 3}
+  farmerBeltItems: {fileID: 0}
+  scarecrowBeltItems: {fileID: 0}
+  DebugModeToggle:
+    actionPath: /actions/default/in/DebugModeToggle
+    needsReinit: 0
+  UseHeldObject:
+    actionPath: /actions/default/in/UseHeldObject
+    needsReinit: 0
+  Wheat: {fileID: 11400000, guid: 8fc7c65b60b75b646a2bb1ec00bd50f8, type: 2}

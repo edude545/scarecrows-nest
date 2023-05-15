@@ -83,6 +83,7 @@ public class Crop : MonoBehaviour
     protected void OnCropPlanted()
     {
         transform.parent = GameController.Instance.LiveCrops.transform;
+        HP = PlantType.MaxHP;
         updateModel();
     }
 

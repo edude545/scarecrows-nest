@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class GameController : MonoBehaviour {
     public float WaggleScoreMultiplier = 1f;
     [Range(0,1)] public float ArmExtensionImportance = 0.5f;
     public float DebugSpookAmount = 0.2f;
-    public float SpawnInterval = 3f;
+    public float SpawnIntervalMultiplier = 1f;
 
     public float SpawnDistance = 100f;
 
@@ -27,11 +28,12 @@ public class GameController : MonoBehaviour {
     public GameObject LeftHandModelPrefabFarmer;
     public GameObject RightHandModelPrefabFarmer;
 
-    public AudioClip[] AmbientSFX;
-
     public Transform LiveCrops;
     public Transform DeadCrops;
     public Transform Birds;
+
+    public CropSpawnDictionary CropSpawnDictionary;
+    public WeightedRandom<GameObject> birdSpawner;
 
     public Dictionary<string, int> Resources = new Dictionary<string, int>();
 
@@ -150,6 +152,7 @@ public class GameController : MonoBehaviour {
                 LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabScarecrow);
                 RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabScarecrow);
             }
+            //generateBirdSpawner();
             Debug.Log("Scarecrow phase beginning");
         } else if (GameState == GameStates.ScarecrowEnd) {
             Debug.Log("Scarecrow phase ending...");
@@ -181,6 +184,31 @@ public class GameController : MonoBehaviour {
         BeltObject obj = rightHand ? rightHeldObject : leftHeldObject;
         if (obj == null) { return; }
         obj.Use(triggerValue);
+    }
+
+    private void generateBirdSpawner() {
+        Dictionary<GameObject, float> dict = new Dictionary<GameObject, float>();
+        Tuple<GameObject, float>[] weightPairs;
+        for (int i = 0; i < LiveCrops.childCount; i++) {
+            weightPairs = CropSpawnDictionary.CropToBirdPrefabs[LiveCrops.transform.GetChild(i).GetComponent<Crop>().PlantType];
+            foreach (Tuple<GameObject,float> pair in weightPairs) {
+                if (!dict.ContainsKey(pair.Item1)) {
+                    dict[pair.Item1] = 0;
+                }
+                dict[pair.Item1] += pair.Item2;
+            }
+        }
+        float[] weights = new float[dict.Count];
+        GameObject[] values = new GameObject[dict.Count];
+        { 
+            int i = 0;
+            foreach (var kvp in dict) {
+                weights[i] = kvp.Value;
+                values[i] = kvp.Key;
+                i++;
+            }
+        }
+        birdSpawner = new WeightedRandom<GameObject>(weights, values);
     }
 
     // --- SteamVR input methods. Listeners are added for these in Start.
@@ -243,19 +271,20 @@ public class GameController : MonoBehaviour {
     }
 
     private IEnumerator spawnBird() {
-        GameObject bird;
+        GameObject spawnedBird;
         while (true) {
             if (GameState == GameStates.Scarecrow) {
-                bird = Instantiate(CrowPrefab, Birds.transform);
-                Vector3 spawn = Random.onUnitSphere * SpawnDistance;
+                //spawnedBird = Instantiate(birdSpawner.Choose(), Birds.transform);
+                spawnedBird = Instantiate(CrowPrefab, Birds.transform);
+                Vector3 spawn = UnityEngine.Random.onUnitSphere * SpawnDistance;
                 if (spawn.y < 0) {
                     spawn.y = -spawn.y;
                 }
                 if (spawn.y < 10) {
                     spawn.y = 10;
                 }
-                bird.transform.position = spawn;
-                yield return new WaitForSeconds(SpawnInterval);
+                spawnedBird.transform.position = spawn;
+                yield return new WaitForSeconds(spawnedBird.GetComponent<Bird>().SpawnInterval * SpawnIntervalMultiplier);
             } else {
                 yield return null;
             }

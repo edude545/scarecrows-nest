@@ -610,24 +610,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 91245003547798332, guid: adf1d9b9a2bdcdb4dbe7a870bd5f6069, type: 3}
   m_PrefabInstance: {fileID: 1119433816}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &720665241 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5926641591895644949, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
-  m_PrefabInstance: {fileID: 1767535067}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &720665243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720665241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3fb6cf561bef4941bdeb73f6a830807, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Crop: {fileID: 0}
 --- !u!4 &775824711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8846471953141418033, guid: adf1d9b9a2bdcdb4dbe7a870bd5f6069, type: 3}
@@ -909,17 +891,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
---- !u!114 &1616337412 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3997552016530050990, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
-  m_PrefabInstance: {fileID: 1767535067}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1650205434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1025,18 +996,6 @@ PrefabInstance:
     - target: {fileID: 4057173121076226666, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
       propertyPath: m_Name
       value: Crop (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4662899109627281197, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
-      propertyPath: TextBG
-      value: 
-      objectReference: {fileID: 1616337412}
-    - target: {fileID: 4662899109627281197, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
-      propertyPath: PlantType
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7013286850253308476, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
-      propertyPath: m_Camera
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8493778444750519343, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
       propertyPath: m_RootOrder
@@ -1237,101 +1196,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &5604910552025987631
-PrefabInstance:
+--- !u!114 &2513592294888963678
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 2
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 947080443779940304, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 947080443779940304, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 947080443779940304, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 947080443779940304, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 947080443779940304, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 947080443779940304, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 947080443779940304, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 947080443779940304, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 947080443779940304, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 947080443779940304, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 947080443779940304, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1177074703788039437, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: m_Name
-      value: GameController
-      objectReference: {fileID: 0}
-    - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: Birds
-      value: 
-      objectReference: {fileID: 1865947711}
-    - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 1143382911}
-    - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: DeadCrops
-      value: 
-      objectReference: {fileID: 1370033325}
-    - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: LiveCrops
-      value: 
-      objectReference: {fileID: 545294391}
-    - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: RoundEndTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: FarmerBeltItems
-      value: 
-      objectReference: {fileID: 629422245}
-    - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: farmerBeltItems
-      value: 
-      objectReference: {fileID: 629422245}
-    - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: ScarecrowBeltItems
-      value: 
-      objectReference: {fileID: 775824711}
-    - target: {fileID: 8010415739571471473, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
-      propertyPath: scarecrowBeltItems
-      value: 
-      objectReference: {fileID: 775824711}
-    m_RemovedComponents: []
-    m_AddedGameObjects: []
-  m_SourcePrefab: {fileID: 100100000, guid: 00b6b444c369afc41b5c5d9f1430ca9e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6745665772145256226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 768944066b989b749a7338d014165064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CrowPrefab: {fileID: 8750348635730674431, guid: 4ef0f65a38b2c944f93edd2dc82b5857, type: 3}
+  BasicCropPrefab: {fileID: 4057173121076226666, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
+  WaggleScoreMultiplier: 0.25
+  ArmExtensionImportance: 0.5
+  DebugSpookAmount: 0.2
+  SpawnIntervalMultiplier: 1
+  SpawnDistance: 100
+  Player: {fileID: 1143382911}
+  LeftHand: {fileID: 0}
+  RightHand: {fileID: 0}
+  Head: {fileID: 0}
+  LeftHandModelPrefabScarecrow: {fileID: 1000011547835092, guid: d8d1e5711b2c77d48ac96e769aaff27a, type: 3}
+  RightHandModelPrefabScarecrow: {fileID: 1000012617731570, guid: b3cb7e5f55e66cb40aea59db72c62365, type: 3}
+  LeftHandModelPrefabFarmer: {fileID: 1000011547835092, guid: d5082f7d9f947374197e0a97786f4e40, type: 3}
+  RightHandModelPrefabFarmer: {fileID: 1000012617731570, guid: 837f93beb9a614743ae3a2c0ada7c388, type: 3}
+  LiveCrops: {fileID: 545294391}
+  DeadCrops: {fileID: 1370033325}
+  Birds: {fileID: 1865947711}
+  CropSpawnDictionary: {fileID: 0}
+  GameState: 0
+  RoundEndTime: 5
+  VRFallback: 0
+  UICanvasPrefab: {fileID: 1797254991410841072, guid: cc669f7f5dd22a54da9ca8c3d23fbaa6, type: 3}
+  FarmerBeltItems: {fileID: 629422245}
+  ScarecrowBeltItems: {fileID: 775824711}
+  DebugModeToggle:
+    actionPath: /actions/default/in/DebugModeToggle
+    needsReinit: 0
+  UseHeldObject:
+    actionPath: /actions/default/in/UseHeldObject
+    needsReinit: 0
+  Wheat: {fileID: 11400000, guid: 8fc7c65b60b75b646a2bb1ec00bd50f8, type: 2}
+--- !u!4 &4678132624816866815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6745665772145256226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6664003607087097097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1391,3 +1314,20 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 5721eebee101ed8418b8e66d2c7785e6, type: 3}
+--- !u!1 &6745665772145256226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4678132624816866815}
+  - component: {fileID: 2513592294888963678}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1

@@ -24,6 +24,8 @@ public class Bird : MonoBehaviour {
     public float DespawnRange = 200f;
     public float FleeSpeed = 20f;
 
+    public float SpawnInterval = 1.6f;
+
     public Vector3 Velocity;
 
     public States State;
@@ -96,15 +98,17 @@ public class Bird : MonoBehaviour {
     void findTarget() {
         if (IsAggressive || GameController.Instance.LiveCrops.childCount == 0) {
             Target = GameController.Instance.Player;
-        } else { // Birds are 3 times more likely to choose their favorite crop, and less likely to choose damaged crops.
+        } else {
             float[] weights = new float[GameController.Instance.LiveCrops.transform.childCount];
             Crop[] values = new Crop[GameController.Instance.LiveCrops.transform.childCount];
             for (int i = 0; i < weights.Length; i++) {
                 Crop crop = GameController.Instance.LiveCrops.transform.GetChild(i).GetComponent<Crop>();
-                float w = crop.PlantType == FavoritePlant ? 3 : 1;
-                w /= crop.HP / crop.PlantType.MaxHP;
+                // Birds are 3 times more likely to choose their favorite crop, and less likely to choose damaged crops.
+                weights[i] = (crop.PlantType == FavoritePlant ? 3f : 1f) * (crop.HP / crop.PlantType.MaxHP);
+                Debug.Log("Added weight " + weights[i] + " for " + crop.PlantType.Name);
                 values[i] = crop;
             }
+            Debug.Log("Making weighted random chooser...");
             WeightedRandom<Crop> crops = new WeightedRandom<Crop>(weights, values);
             Target = crops.Choose().gameObject;
         }

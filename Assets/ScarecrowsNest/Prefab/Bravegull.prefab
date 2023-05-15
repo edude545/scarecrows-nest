@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6328101653948826642}
   - component: {fileID: 555484921629823196}
   m_Layer: 0
-  m_Name: Seagull
+  m_Name: Bravegull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,19 +47,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FlySpeed: 0.1
-  Braveness: 1
-  FearDecay: 0.002
+  Braveness: 2
+  FearDecay: 0.004
   VisualContactAngle: 67.39
   CorrectionWeight: 0.5
   animator: {fileID: 8287387821083864779}
   Target: {fileID: 0}
   IsAggressive: 0
-  FavoritePlant: {fileID: 11400000, guid: 8fc7c65b60b75b646a2bb1ec00bd50f8, type: 2}
+  FavoritePlant: {fileID: 11400000, guid: 4bd35b49938d4f0419a0db97fa2a1b72, type: 2}
   Fear: 0
   Fleeing: 0
   InteractRange: 2
   DespawnRange: 100
   FleeSpeed: 0.3
+  SpawnInterval: 1.6
   Velocity: {x: 0, y: 0, z: 0}
   State: 0
 --- !u!114 &555484921629823196
@@ -174,6 +175,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 18.432768
       objectReference: {fileID: 0}
+    - target: {fileID: -1578444296140453417, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1f5a7b9d67d8354799973d55caf81ad, type: 2}
+    - target: {fileID: -1578444296140453417, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1f5a7b9d67d8354799973d55caf81ad, type: 2}
+    - target: {fileID: -1578444296140453417, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1f5a7b9d67d8354799973d55caf81ad, type: 2}
+    - target: {fileID: -1578444296140453417, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1f5a7b9d67d8354799973d55caf81ad, type: 2}
+    - target: {fileID: -1578444296140453417, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1f5a7b9d67d8354799973d55caf81ad, type: 2}
     - target: {fileID: -1290992297966254886, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -0

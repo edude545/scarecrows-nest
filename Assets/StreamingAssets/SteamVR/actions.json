@@ -55,6 +55,11 @@
       "requirement": "optional"
     },
     {
+      "name": "/actions/default/in/UseHeldObject",
+      "type": "vector1",
+      "requirement": "mandatory"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },

@@ -25,11 +25,13 @@ public class Crop : MonoBehaviour
     protected static Material highlightMat;*/
     // ---
 
-    public int GrowthStage;
+    public int GrowthStage = 0;
     public Plant PlantType;
     public int PlantedSeeds = 0;
 
     public float HP;
+
+    private GameObject model;
 
     protected virtual void Start()
     {
@@ -59,21 +61,39 @@ public class Crop : MonoBehaviour
         Canvas.transform.LookAt(GameController.Instance.Head.transform);
     }
 
-    public void ReceiveSeed(Seed seed)
+    public void ReceiveSeed(Plant plantType)
     {
         if (PlantType == null)
         {
-            PlantType = seed.PlantType;
+            PlantType = plantType;
             PlantedSeeds = 0;
         }
-        if (PlantType == seed.PlantType)
+        if (PlantType == plantType)
         {
             PlantedSeeds++;
-            UpdateText();
+            updateText();
+            updateModel();
+        }
+        if (PlantedSeeds == PlantType.RequiredSeeds)
+        {
+            OnCropPlanted();
         }
     }
 
-    protected void UpdateText()
+    protected void OnCropPlanted()
+    {
+        transform.parent = GameController.Instance.LiveCrops.transform;
+        HP = PlantType.MaxHP;
+        updateModel();
+    }
+
+    public void OnCropKilled()
+    {
+        transform.parent = GameController.Instance.DeadCrops.transform;
+        updateModel();
+    }
+
+    protected void updateText()
     {
         if (PlantType == null) {
             Canvas.gameObject.SetActive(false);
@@ -93,23 +113,31 @@ public class Crop : MonoBehaviour
 
     // Returns the number of resources yielded by the crop this cycle. Called from GameController#onCycleEnd.
     public int OnCycleEnd() {
-        updateModel();
         GrowthStage++;
-        if (GrowthStage == PlantType.GrowthTime) {
+        if (PlantType != null && GrowthStage == PlantType.GrowthTime) {
             int yield = Random.Range(PlantType.MinYield, PlantType.MaxYield);
+            GameController.Instance.AddResource(PlantType, yield);
             PlantType = null;
             GrowthStage = 0;
-            return yield;
         }
+        updateText();
+        updateModel();
         return 0;
     }
 
     private void updateModel() {
         // todo: allow separate models for growth stages
-        if (PlantType != null)
-        {
-            float s = (GrowthStage + 1) / (PlantType.GrowthTime + 1); // Add 1 to values so the crop is visible at stage 0
-            gameObject.transform.localScale = new Vector3(s, s, s);
+        if (PlantType == null) {
+            if (model != null) {
+                Destroy(model);
+            }
+        } else {
+            if (model == null) {
+                model = Instantiate(PlantType.Model, transform);
+                model.transform.position += new Vector3(0f, 0.155f, 0f);
+            }
+            float s = (GrowthStage*4.0f + 4) / (PlantType.GrowthTime + 4); // Add 4 to values so the crop is visible at stage 0
+            model.transform.localScale = new Vector3(s, s, s);
         }
     }
 

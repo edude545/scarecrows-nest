@@ -5,11 +5,11 @@ using UnityEngine;
 public class Planter : MonoBehaviour
 {
 
-    Crop crop;
+    public Crop Crop;
 
     void Start()
     {
-        crop = transform.parent.GetComponent<Crop>();
+        Crop = transform.parent.GetComponent<Crop>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -17,8 +17,8 @@ public class Planter : MonoBehaviour
         Seed seed = other.GetComponent<Seed>();
         if (seed != null)
         {
-            crop.ReceiveSeed(seed);
-            Destroy(seed.gameObject);
+            Crop.ReceiveSeed(seed.PlantType);
+            seed.ResetSeed();
         }
     }
 

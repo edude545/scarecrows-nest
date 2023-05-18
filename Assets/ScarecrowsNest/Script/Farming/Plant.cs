@@ -17,4 +17,6 @@ public class Plant : ScriptableObject
     public int MinYield;
     public int MaxYield;
 
+    public GameObject Model;
+
 }

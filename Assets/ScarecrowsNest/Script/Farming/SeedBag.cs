@@ -4,13 +4,12 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
-public class SeedBag : UIElement
+public class SeedBag : MonoBehaviour// : UIElement
 {
 
-    public Plant PlantType;
-    public GameObject SeedPrefab;
+    //public GameObject SeedPrefab;
 
-    public void SpawnSeed(Hand hand)
+    /*public void SpawnSeed(Hand hand)
     {
         if (hand == null)
         {
@@ -18,7 +17,7 @@ public class SeedBag : UIElement
         } else
         {
             GameObject seed = Instantiate(SeedPrefab);
-            hand.AttachObject(seed, GrabTypes.Scripted);
+            hand.AttachObject(seed, GrabTypes.Trigger);
         }
     }
 
@@ -26,6 +25,6 @@ public class SeedBag : UIElement
     {
         SpawnSeed(currentHand);
         onHandClick.Invoke(currentHand);
-    }
+    }*/
 
 }

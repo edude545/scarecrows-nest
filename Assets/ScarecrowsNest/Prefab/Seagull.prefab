@@ -49,14 +49,19 @@ MonoBehaviour:
   FlySpeed: 0.1
   Braveness: 1
   FearDecay: 0.002
+  VisualContactAngle: 67.39
   CorrectionWeight: 0.5
   animator: {fileID: 8287387821083864779}
   Target: {fileID: 0}
+  IsAggressive: 0
+  FavoritePlant: {fileID: 11400000, guid: 8fc7c65b60b75b646a2bb1ec00bd50f8, type: 2}
   Fear: 0
   Fleeing: 0
-  DespawnRange: 200
-  FleeSpeed: 3
+  InteractRange: 2
+  DespawnRange: 100
+  FleeSpeed: 0.3
   Velocity: {x: 0, y: 0, z: 0}
+  State: 0
 --- !u!114 &555484921629823196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,15 +112,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 1.2524238
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 1.2524238
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 1.2524238
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
       propertyPath: m_LocalPosition.x

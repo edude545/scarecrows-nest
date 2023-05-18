@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2121217275481569798}
   - component: {fileID: 4843871618756950536}
   - component: {fileID: 8114521301574101884}
-  - component: {fileID: 6076143730063093108}
+  - component: {fileID: 1675638980198417005}
   m_Layer: 0
   m_Name: Seed
   m_TagString: Untagged
@@ -32,11 +32,11 @@ Transform:
   m_GameObject: {fileID: 1814495302409670354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.9766093, y: 0.6496141, z: 2.994059}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.6617, y: 2.6617, z: 2.6617}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1814495302409670381
 MonoBehaviour:
@@ -165,10 +165,34 @@ MonoBehaviour:
   restoreOriginalParent: 0
   onPickUp:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1814495302409670381}
+        m_TargetAssemblyTypeName: Seed, Assembly-CSharp
+        m_MethodName: OnAttach
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDetachFromHand:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1814495302409670381}
+        m_TargetAssemblyTypeName: Seed, Assembly-CSharp
+        m_MethodName: OnDetach
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHeldUpdate:
     m_PersistentCalls:
       m_Calls: []
@@ -223,8 +247,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814495302409670354}
   m_Mesh: {fileID: 4300002, guid: 56377e28a47008245871ca7b435044c4, type: 3}
---- !u!65 &6076143730063093108
-BoxCollider:
+--- !u!135 &1675638980198417005
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -234,5 +258,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.005857496, y: 0.09417518, z: 0.02759136}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.047087587
+  m_Center: {x: 0.000000029802322, y: 0, z: 0.000000029802322}

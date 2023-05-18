@@ -271,7 +271,7 @@ PrefabInstance:
     - target: {fileID: 8212701272224152601, guid: 5721eebee101ed8418b8e66d2c7785e6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3cb42b11e0827b84687c6628245b8637, type: 2}
+      objectReference: {fileID: 2100000, guid: d58f251e0fe9a4b58b96691b805ce1fd, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 5721eebee101ed8418b8e66d2c7785e6, type: 3}
@@ -319,6 +319,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &426111024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4057173121076226666, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
+  m_PrefabInstance: {fileID: 1650205434}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &458770749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -643,6 +648,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8493778444750519343, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
   m_PrefabInstance: {fileID: 1650205434}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1043212923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426111024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8822315630ea7194597b7acd7e49e222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlantType: {fileID: 11400000, guid: 4bd35b49938d4f0419a0db97fa2a1b72, type: 2}
 --- !u!1 &1113424152 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5926641591895644949, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
@@ -768,11 +786,29 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 107946, guid: adf1d9b9a2bdcdb4dbe7a870bd5f6069, type: 3}
   m_PrefabInstance: {fileID: 1119433816}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1148353358 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4057173121076226666, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
+  m_PrefabInstance: {fileID: 1420356112}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1274775287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8493778444750519343, guid: 01cd871e6532eff4cb19ea3657e15241, type: 3}
   m_PrefabInstance: {fileID: 1420356112}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1274775288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148353358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8822315630ea7194597b7acd7e49e222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlantType: {fileID: 11400000, guid: 8fc7c65b60b75b646a2bb1ec00bd50f8, type: 2}
 --- !u!1 &1370033324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,7 +1265,7 @@ MonoBehaviour:
   CropSpawnDictionary: {fileID: 0}
   GameState: 0
   RoundEndTime: 5
-  VRFallback: 0
+  VRFallback: 1
   UICanvasPrefab: {fileID: 1797254991410841072, guid: cc669f7f5dd22a54da9ca8c3d23fbaa6, type: 3}
   FarmerBeltItems: {fileID: 629422245}
   ScarecrowBeltItems: {fileID: 775824711}

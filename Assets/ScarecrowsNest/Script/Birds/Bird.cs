@@ -83,7 +83,7 @@ public class Bird : MonoBehaviour {
         } else if (State == States.Attacking) {
 
         } else if (State == States.Fleeing) {
-            transform.position += FleeSpeed * transform.position.normalized;
+            transform.position += FleeSpeed * (transform.position-Target.transform.position).normalized;
         }
 
         if (transform.position.magnitude > DespawnRange) {

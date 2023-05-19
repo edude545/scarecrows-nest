@@ -60,6 +60,7 @@ MonoBehaviour:
   InteractRange: 2
   DespawnRange: 100
   FleeSpeed: 0.3
+  SpawnInterval: 1.6
   Velocity: {x: 0, y: 0, z: 0}
   State: 0
 --- !u!114 &555484921629823196
@@ -112,15 +113,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2524238
+      value: 0.77019
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2524238
+      value: 0.77019
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2524238
+      value: 0.77019
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
       propertyPath: m_LocalPosition.x

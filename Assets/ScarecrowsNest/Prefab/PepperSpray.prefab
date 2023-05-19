@@ -25,15 +25,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3506243788167255786}
-  m_LocalRotation: {x: -0.0000001490116, y: 0.000000119209275, z: 0.000000042840835, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.28165796, y: 0.00000012644954, z: 0.00000000753016, w: 0.95951486}
+  m_LocalPosition: {x: -0.2, y: -0.727, z: -1.376}
+  m_LocalScale: {x: 1.1856, y: 1.1856, z: 1.1856}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6965171929285387120}
   m_Father: {fileID: 4226263774157188532}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 32.718, y: 0, z: 0}
 --- !u!33 &2974442148840283269
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 1790609298614841310}
   - component: {fileID: 8569985153490994124}
   - component: {fileID: 1255579297479861804}
+  - component: {fileID: 373445576999365663}
   m_Layer: 0
   m_Name: PepperSpray
   m_TagString: Untagged
@@ -262,6 +263,58 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &373445576999365663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3678278410999798182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7418c7dd8f977d4e969202d3fa7e926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseEditorExpanded: 0
+  blendEditorExpanded: 0
+  poseNames:
+  - PepperSprayHold (MAIN)
+  - PepperSpraySqueeze
+  overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf, type: 3}
+  overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25, type: 3}
+  skeletonMainPose: {fileID: 11400000, guid: 593bcb618b297ed41a3b854ab95953d6, type: 2}
+  skeletonAdditionalPoses:
+  - {fileID: 11400000, guid: 28fc065a9d4fd0345b1bf4fde600182d, type: 2}
+  showLeftPreview: 0
+  showRightPreview: 1
+  previewLeftInstance: {fileID: 0}
+  previewRightInstance: {fileID: 0}
+  previewPoseSelection: 0
+  blendingBehaviours:
+  - name: TriggerSqueeze
+    enabled: 1
+    influence: 1
+    pose: 0
+    value: 0
+    action_single:
+      actionPath: /actions/default/in/Squeeze
+      needsReinit: 0
+    action_bool:
+      actionPath: 
+      needsReinit: 0
+    smoothingSpeed: 10
+    type: 1
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  scale: 1
 --- !u!1 &5675505539103791523
 GameObject:
   m_ObjectHideFlags: 0

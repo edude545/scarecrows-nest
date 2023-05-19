@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 772.8
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Project
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 55
+  controlID: 60
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 56
+  controlID: 61
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 57
+  controlID: 62
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -346,22 +346,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/ScarecrowsNest/Scene
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/ScarecrowsNest/Scene
+  - Assets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\epadd\OneDrive\Documents\GitHub\scarecrows-nest
+  m_LastProjectPath: E:\Accademia\Extended Realities\scarecrows-nest-main\scarecrows-nest
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 1157.4}
-    m_SelectedIDs: d0660000
-    m_LastClickedID: 26320
-    m_ExpandedIDs: 00000000de650000e0650000e2650000e4650000e6650000e8650000ea650000ec650000ee650000f0650000f2650000f4650000f6650000f8650000fa650000fc650000fe6500000066000002660000046600000666000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 31}
+    m_SelectedIDs: c6680000
+    m_LastClickedID: 26822
+    m_ExpandedIDs: 00000000c6680000c8680000ca680000cc680000ce680000d0680000d2680000d4680000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -389,7 +389,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000de650000e0650000e2650000e4650000e6650000e8650000ea650000ec650000ee650000f0650000f2650000f4650000f6650000f8650000fa650000fc650000fe65000000660000026600000466000006660000
+    m_ExpandedIDs: 00000000c6680000c8680000ca680000cc680000ce680000d0680000d2680000d4680000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -517,9 +517,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: de53fcff
-      m_LastClickedID: -240674
-      m_ExpandedIDs: c055fcff5c8efcff9ca3fcff38fbffff
+      m_SelectedIDs: fa690000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 10fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -768,9 +768,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -28.002703, y: 2.4649453, z: -1.1359785}
+    m_Target: {x: -0.4919369, y: 0.09845996, z: 0.8197331}
     speed: 2
-    m_Value: {x: -28.002703, y: 2.4649453, z: -1.1359785}
+    m_Value: {x: -0.4919369, y: 0.09845996, z: 0.8197331}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 2
@@ -817,13 +817,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.016766917, y: 0.7145024, z: 0.017168496, w: -0.69923365}
+    m_Target: {x: 0.000000726823, y: 0.9294091, z: -0.3690644, w: 0.0000005006915}
     speed: 2
-    m_Value: {x: 0.015693769, y: 0.71556926, z: 0.016120126, w: -0.6981794}
+    m_Value: {x: 0.0000007275696, y: 0.92884994, z: -0.37045628, w: 0.0000004995983}
   m_Size:
-    m_Target: 15.194693
+    m_Target: 1.7103163
     speed: 2
-    m_Value: 15.194693
+    m_Value: 1.7103163
   m_Ortho:
     m_Target: 0
     speed: 2

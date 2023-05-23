@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
     public GameObject BasicCropPrefab;
 
     public float WaggleScoreMultiplier = 1f;
-    [Range(0,1)] public float ArmExtensionImportance = 0.5f;
+    [Range(0, 1)] public float ArmExtensionImportance = 0.5f;
     public float DebugSpookAmount = 0.2f;
     public float SpawnIntervalMultiplier = 1f;
 
@@ -28,19 +28,23 @@ public class GameController : MonoBehaviour {
     public GameObject LeftHandModelPrefabFarmer;
     public GameObject RightHandModelPrefabFarmer;
 
-    public Transform LiveCrops;
-    public Transform DeadCrops;
-    public Transform Birds;
+    // --- Player attributes
+    public Transform FarmerBeltItems;
+    public Transform ScarecrowBeltItems;
+    BeltObject leftHeldObject;
+    BeltObject rightHeldObject;
 
-    public CropSpawnDictionary CropSpawnDictionary;
-    public WeightedRandom<GameObject> birdSpawner;
-
-    public Dictionary<string, int> Resources = new Dictionary<string, int>();
+    // --- Game attributes
 
     public GameStates GameState = GameStates.Farm;
     float roundTimer = 0f; // seconds
     public float RoundEndTime = 5f;
-    
+
+    public Dictionary<Plant, int> Resources = new Dictionary<Plant, int>();
+
+    public CropSpawnDictionary CropSpawnDictionary;
+    public WeightedRandom<GameObject> birdSpawner;
+
     public static float LeftArmExtension;
     public static float RightArmExtension;
     public static Vector3 LeftHandLastPos;
@@ -49,19 +53,36 @@ public class GameController : MonoBehaviour {
     public static float RightHandWaggleScore;
     public static float WaggleScore;
 
+    // --- Farm island attributes
+
+    public Transform FarmPlayerSpot;
+
+    public Transform LiveCrops;
+    public Transform DeadCrops;
+    public Transform Birds;
+
+    // --- Shop island attributes
+
+    public Transform ShopPlayerSpot;
+
+    public Whiteboard ShopWhiteboard;
+
+    public GameObject UpgradeUnlockPlantPumpkin;
+    public GameObject UpgradeUnlockPlantPepper;
+
+    public GameObject UpgradeUnlockToolNoiseGun;
+    public GameObject UpgradeUnlockToolPepperSpray;
+
+    public GameObject UpgradePumpkinHead;
+    public GameObject UpgradeCapsaicinRefill;
+
+    // --- Technical
+
     public bool VRFallback = false;
     public Canvas UICanvasPrefab;
-
-    // --- Player attributes
-    public Transform FarmerBeltItems;
-    public Transform ScarecrowBeltItems;
-    BeltObject leftHeldObject;
-    BeltObject rightHeldObject;
-
     public SteamVR_Action_Boolean DebugModeToggle;
     public SteamVR_Action_Single UseHeldObject;
 
-    protected Crop SelectedCrop;
     // ---
 
     public enum GameStates {
@@ -75,8 +96,7 @@ public class GameController : MonoBehaviour {
         Instance = this;
     }
 
-    private void Start()
-    {
+    private void Start() {
         Canvas canv = Instantiate(UICanvasPrefab);
         if (VRFallback) {
             Transform noSteamVRFallbackObjects = Player.transform.Find("NoSteamVRFallbackObjects");
@@ -97,12 +117,9 @@ public class GameController : MonoBehaviour {
     }
 
     public Plant Wheat;
-    private void Update()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-            for (int i = 0; i < Birds.transform.childCount; i++)
-            {
+    private void Update() {
+        if (Input.GetKeyDown("space")) {
+            for (int i = 0; i < Birds.transform.childCount; i++) {
                 Birds.transform.GetChild(i).GetComponent<Bird>().Spook(DebugSpookAmount);
             }
         }
@@ -135,6 +152,7 @@ public class GameController : MonoBehaviour {
                 }
             }
         } else if (GameState == GameStates.Shop) {
+
             if (Input.GetKeyDown("m")) {
                 ChangeGameState(GameStates.Farm);
             }
@@ -157,6 +175,8 @@ public class GameController : MonoBehaviour {
         } else if (GameState == GameStates.ScarecrowEnd) {
             Debug.Log("Scarecrow phase ending...");
         } else if (GameState == GameStates.Farm) {
+            Player.transform.parent = FarmPlayerSpot;
+            Player.transform.localPosition = Vector3.zero;
             Debug.Log("Entering farm phase");
             FarmerBeltItems.gameObject.SetActive(true);
             ScarecrowBeltItems.gameObject.SetActive(false);
@@ -165,6 +185,8 @@ public class GameController : MonoBehaviour {
                 RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabFarmer);
             }
         } else if (GameState == GameStates.Shop) {
+            Player.transform.parent = ShopPlayerSpot;
+            Player.transform.localPosition = Vector3.zero;
             FarmerBeltItems.gameObject.SetActive(false);
             ScarecrowBeltItems.gameObject.SetActive(false);
             Debug.Log("Moving to shop");
@@ -175,7 +197,8 @@ public class GameController : MonoBehaviour {
         switch (GameState) {
             case GameStates.Scarecrow: ChangeGameState(GameStates.ScarecrowEnd); break;
             case GameStates.ScarecrowEnd: break;
-            case GameStates.Farm: case GameStates.Shop: ChangeGameState(GameStates.Scarecrow); break;
+            case GameStates.Farm: ChangeGameState(GameStates.Scarecrow); break;
+            case GameStates.Shop: ChangeGameState(GameStates.Farm); break;
         }
     }
 
@@ -242,9 +265,24 @@ public class GameController : MonoBehaviour {
     }
 
     public void AddResource(Plant PlantType, int amount) {
-        int n = Resources.ContainsKey(PlantType.Name) ? Resources[PlantType.Name] : 0;
-        Resources[PlantType.Name] = n + amount;
+        int n = Resources.ContainsKey(PlantType) ? Resources[PlantType] : 0;
+        Resources[PlantType] = n + amount;
         Debug.Log("Got "+amount+" "+PlantType.name);
+    }
+
+    public bool AttemptPurchase(Dictionary<Plant, int> cost) {
+        bool valid = true;
+        foreach (var kvp in cost) {
+            if (Resources[kvp.Key] <= kvp.Value) {
+                valid = false;
+            }
+        }
+        if (valid) {
+            foreach (var kvp in cost) {
+                Resources[kvp.Key] -= kvp.Value;
+            }
+        }
+        return valid;
     }
 
     private void calculateWaggle() {

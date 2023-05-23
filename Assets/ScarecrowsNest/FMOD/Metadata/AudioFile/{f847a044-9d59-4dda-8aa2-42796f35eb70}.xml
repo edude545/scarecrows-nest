@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{f847a044-9d59-4dda-8aa2-42796f35eb70}">
+		<property name="assetPath">
+			<value>JupiterBass_PS1.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>71.707324263038544</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{6a278ce7-e64d-424f-981f-efe367f8712b}</destination>
+		</relationship>
+	</object>
+</objects>

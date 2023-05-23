@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{324ab748-2e3e-4da8-a49c-84769737dabd}">
+		<property name="assetPath">
+			<value>335871__silentseason__crows-at-dawn-2.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>33.715374149659866</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{6a278ce7-e64d-424f-981f-efe367f8712b}</destination>
+		</relationship>
+	</object>
+</objects>

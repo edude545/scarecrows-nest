@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{9acdb46c-c311-4c9b-8fa2-395480ba7dc4}">
+		<property name="assetPath">
+			<value>406558__anthousai__hit-metallic-watering-can-flicking-a-metal-watering-can-01.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.2669999999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{6a278ce7-e64d-424f-981f-efe367f8712b}</destination>
+		</relationship>
+	</object>
+</objects>

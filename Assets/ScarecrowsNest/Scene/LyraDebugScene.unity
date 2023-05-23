@@ -1268,16 +1268,7 @@ MonoBehaviour:
   VRFallback: 1
   UICanvasPrefab: {fileID: 1797254991410841072, guid: cc669f7f5dd22a54da9ca8c3d23fbaa6, type: 3}
   FarmerBeltItems: {fileID: 629422245}
-  SeedBagWheat: {fileID: 0}
-  SeedBagPumpkin: {fileID: 0}
-  SeedBagTomato: {fileID: 0}
-  SeedBagPepper: {fileID: 0}
   ScarecrowBeltItems: {fileID: 775824711}
-  NoiseGun: {fileID: 0}
-  PepperSpray: {fileID: 0}
-  FarmIslandPlayerSpot: {fileID: 0}
-  ShopIslandPlayerSpot: {fileID: 0}
-  ShopPepperSprayRefill: {fileID: 0}
   DebugModeToggle:
     actionPath: /actions/default/in/DebugModeToggle
     needsReinit: 0

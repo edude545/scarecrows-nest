@@ -37,7 +37,7 @@ public class BirdHealthBar : MonoBehaviour
 
     private void Update()
     {
-        bar.transform.rotation = Camera.main.transform.rotation;
+        //bar.transform.rotation = crow.Target.transform.rotation;
         float f = crow.Fear / crow.Braveness;
         propBlock.SetColor("_Color", crow.Fleeing ? Color.yellow : new Color(1*f, 1*(1-f), 0));
         bar.transform.localScale = new Vector3(f / crow.Braveness * 0.5f, 0.1f, 0.1f);
@@ -48,7 +48,7 @@ public class BirdHealthBar : MonoBehaviour
     {
         barMesh = new Mesh();
         barMesh.vertices = new Vector3[] { new Vector3(-1,-1,0), new Vector3(1,-1,0), new Vector3(1,1,0), new Vector3(-1,1,0) };
-        barMesh.triangles = new int[] { 2,1,0, 0,3,2 };
+        barMesh.triangles = new int[] { 0,1,2, 2,3,0 };
         barMesh.RecalculateNormals();
     }
 

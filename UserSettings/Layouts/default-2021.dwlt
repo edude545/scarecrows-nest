@@ -19,11 +19,7 @@ MonoBehaviour:
     width: 1521.6
     height: 758.4
   m_ShowMode: 4
-<<<<<<< HEAD
   m_Title: Project
-=======
-  m_Title: Scene
->>>>>>> 212a3f42aaa86e9dfbe86fde382d461e64d17b2b
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -52,11 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-<<<<<<< HEAD
   controlID: 106
-=======
-  controlID: 74
->>>>>>> 212a3f42aaa86e9dfbe86fde382d461e64d17b2b
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -74,13 +66,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1161.6
     y: 0
-<<<<<<< HEAD
     width: 360
     height: 708.4
-=======
-    width: 363.19995
-    height: 722.8
->>>>>>> 212a3f42aaa86e9dfbe86fde382d461e64d17b2b
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 14}
@@ -106,13 +93,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
     width: 288
     height: 418.4
-=======
-    width: 290.4
-    height: 427.2
->>>>>>> 212a3f42aaa86e9dfbe86fde382d461e64d17b2b
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 15}
@@ -242,11 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-<<<<<<< HEAD
   controlID: 107
-=======
-  controlID: 75
->>>>>>> 212a3f42aaa86e9dfbe86fde382d461e64d17b2b
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -271,11 +249,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-<<<<<<< HEAD
   controlID: 108
-=======
-  controlID: 76
->>>>>>> 212a3f42aaa86e9dfbe86fde382d461e64d17b2b
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -372,37 +346,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-<<<<<<< HEAD
     - Assets/DinV_Studio/Poly_Low_Trees_Pack_FREE/Models
-=======
-    - Assets/ScarecrowsNest/Material
->>>>>>> 212a3f42aaa86e9dfbe86fde382d461e64d17b2b
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-<<<<<<< HEAD
   - Assets/DinV_Studio/Poly_Low_Trees_Pack_FREE/Models
-=======
-  - Assets/ScarecrowsNest/Material
->>>>>>> 212a3f42aaa86e9dfbe86fde382d461e64d17b2b
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\epadd\OneDrive\Documents\GitHub\scarecrows-nest
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-<<<<<<< HEAD
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 96680000
     m_LastClickedID: 26774
     m_ExpandedIDs: 0000000060680000626800006468000066680000686800006a6800006c6800006e68000070680000726800007468000076680000786800007a6800007c6800007e6800008068000082680000846800008668000088680000fc68000000ca9a3bffffff7f
-=======
-    scrollPos: {x: 0, y: 149.40002}
-    m_SelectedIDs: 3a6a0000
-    m_LastClickedID: 27194
-    m_ExpandedIDs: 000000009c6900009e690000a0690000a2690000a4690000a6690000a8690000aa690000cc690000
->>>>>>> 212a3f42aaa86e9dfbe86fde382d461e64d17b2b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -430,11 +389,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-<<<<<<< HEAD
     m_ExpandedIDs: 0000000060680000626800006468000066680000686800006a6800006c6800006e68000070680000726800007468000076680000786800007a6800007c6800007e6800008068000082680000846800008668000088680000
-=======
-    m_ExpandedIDs: 000000009c6900009e690000a0690000a2690000a4690000a6690000a8690000aa690000
->>>>>>> 212a3f42aaa86e9dfbe86fde382d461e64d17b2b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -462,11 +417,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-<<<<<<< HEAD
     m_ExpandedInstanceIDs: c6230000f6a80000e0180100127600001019010000190100000000001a6d00008c970000
-=======
-    m_ExpandedInstanceIDs: c6230000f6a80000e018010012760000101901000019010000000000
->>>>>>> 212a3f42aaa86e9dfbe86fde382d461e64d17b2b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -566,15 +517,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-<<<<<<< HEAD
       m_SelectedIDs: 
       m_LastClickedID: 0
       m_ExpandedIDs: e24ce2ffd6c7e2ffe69ee3ffd2a4e3ff58a9e3ffccb1e6ff34fde6ffc0fde6ff74fee6ffae01e7ff2ee9ecff9625edff1e26edff662eedffda32edffba36edffd43aedffe835eeff4c3ceeffbe3feeff1443eeffe446eeff5a4aeeff9e94eeffaca2eeff7ea7eefffcafeeff50daeeff7a0defffb413efffecdbefff32e4efffe0ebefff0ceeefff32f8ffff90660000347900006c790000a48100000495000096960000ba960000729a0000
-=======
-      m_SelectedIDs: ceebffff
-      m_LastClickedID: -5170
-      m_ExpandedIDs: 06fbffff
->>>>>>> 212a3f42aaa86e9dfbe86fde382d461e64d17b2b
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: Red Pepper
@@ -823,15 +768,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-<<<<<<< HEAD
     m_Target: {x: -53.62127, y: 4.39296, z: -31.99827}
     speed: 2
     m_Value: {x: -53.62127, y: 4.39296, z: -31.99827}
-=======
-    m_Target: {x: -0.05359918, y: 0.2370586, z: 0.009307362}
-    speed: 2
-    m_Value: {x: -0.05359918, y: 0.2370586, z: 0.009307362}
->>>>>>> 212a3f42aaa86e9dfbe86fde382d461e64d17b2b
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 2
@@ -878,7 +817,6 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-<<<<<<< HEAD
     m_Target: {x: 0.01285002, y: 0.8696415, z: 0.022713847, w: -0.49296704}
     speed: 2
     m_Value: {x: 0.012850189, y: 0.86965287, z: 0.022714145, w: -0.4929735}
@@ -886,15 +824,6 @@ MonoBehaviour:
     m_Target: 34.142944
     speed: 2
     m_Value: 34.142944
-=======
-    m_Target: {x: -0.21085827, y: 0.74999106, z: -0.28255525, w: -0.55968183}
-    speed: 2
-    m_Value: {x: -0.21001549, y: 0.75040317, z: -0.28142583, w: -0.55998933}
-  m_Size:
-    m_Target: 0.75282115
-    speed: 2
-    m_Value: 0.75282115
->>>>>>> 212a3f42aaa86e9dfbe86fde382d461e64d17b2b
   m_Ortho:
     m_Target: 0
     speed: 2

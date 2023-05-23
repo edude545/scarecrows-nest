@@ -52,16 +52,29 @@ public class GameController : MonoBehaviour {
     public bool VRFallback = false;
     public Canvas UICanvasPrefab;
 
-    // --- Player attributes
     public Transform FarmerBeltItems;
+    public GameObject SeedBagWheat;
+    public GameObject SeedBagPumpkin;
+    public GameObject SeedBagTomato;
+    public GameObject SeedBagPepper;
+
     public Transform ScarecrowBeltItems;
+    public ScarecrowGun NoiseGun;
+    public ScarecrowGun PepperSpray;
+
+    public Transform FarmIslandPlayerSpot;
+    public Transform ShopIslandPlayerSpot;
+
+    public UpgradeItem ShopPepperSprayRefill;
+
     BeltObject leftHeldObject;
     BeltObject rightHeldObject;
 
     public SteamVR_Action_Boolean DebugModeToggle;
     public SteamVR_Action_Single UseHeldObject;
 
-    protected Crop SelectedCrop;
+
+    //protected Crop SelectedCrop;
     // ---
 
     public enum GameStates {
@@ -158,6 +171,8 @@ public class GameController : MonoBehaviour {
             Debug.Log("Scarecrow phase ending...");
         } else if (GameState == GameStates.Farm) {
             Debug.Log("Entering farm phase");
+            Player.transform.parent = FarmIslandPlayerSpot;
+            Player.transform.localPosition = Vector3.zero;
             FarmerBeltItems.gameObject.SetActive(true);
             ScarecrowBeltItems.gameObject.SetActive(false);
             if (!VRFallback) {
@@ -165,6 +180,8 @@ public class GameController : MonoBehaviour {
                 RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabFarmer);
             }
         } else if (GameState == GameStates.Shop) {
+            Player.transform.parent = ShopIslandPlayerSpot;
+            Player.transform.localPosition = Vector3.zero;
             FarmerBeltItems.gameObject.SetActive(false);
             ScarecrowBeltItems.gameObject.SetActive(false);
             Debug.Log("Moving to shop");
@@ -175,7 +192,8 @@ public class GameController : MonoBehaviour {
         switch (GameState) {
             case GameStates.Scarecrow: ChangeGameState(GameStates.ScarecrowEnd); break;
             case GameStates.ScarecrowEnd: break;
-            case GameStates.Farm: case GameStates.Shop: ChangeGameState(GameStates.Scarecrow); break;
+            case GameStates.Farm: ChangeGameState(GameStates.Scarecrow); break;
+            case GameStates.Shop: ChangeGameState(GameStates.Farm); break;
         }
     }
 
@@ -184,6 +202,24 @@ public class GameController : MonoBehaviour {
         BeltObject obj = rightHand ? rightHeldObject : leftHeldObject;
         if (obj == null) { return; }
         obj.Use(triggerValue);
+    }
+
+    public void ApplyUpgrade(UpgradeItem.Upgrades u) {
+        switch (u) {
+            case UpgradeItem.Upgrades.UnlockSeedPumpkin: SeedBagPumpkin.SetActive(true); break;
+            case UpgradeItem.Upgrades.UnlockSeedTomato: SeedBagTomato.SetActive(true); break;
+            case UpgradeItem.Upgrades.UnlockSeedPepper: SeedBagPepper.SetActive(true); break;
+
+            case UpgradeItem.Upgrades.ToolNoiseGun: NoiseGun.gameObject.SetActive(true); break;
+            case UpgradeItem.Upgrades.ToolPepperSpray: PepperSpray.gameObject.SetActive(true); ShopPepperSprayRefill.gameObject.SetActive(true); break;
+
+            case UpgradeItem.Upgrades.PumpkinHead: break; // TODO
+            case UpgradeItem.Upgrades.PepperSprayRefill: PepperSpray.ReplenishCharge(); break;
+        }
+    }
+
+    public void ChangeBodySize(float d) {
+
     }
 
     private void generateBirdSpawner() {
@@ -276,7 +312,7 @@ public class GameController : MonoBehaviour {
             if (GameState == GameStates.Scarecrow) {
                 //spawnedBird = Instantiate(birdSpawner.Choose(), Birds.transform);
                 spawnedBird = Instantiate(CrowPrefab, Birds.transform);
-                Vector3 spawn = UnityEngine.Random.onUnitSphere * SpawnDistance;
+                Vector3 spawn = Player.transform.position + UnityEngine.Random.onUnitSphere * SpawnDistance;
                 if (spawn.y < 0) {
                     spawn.y = -spawn.y;
                 }

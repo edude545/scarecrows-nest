@@ -60,6 +60,7 @@ MonoBehaviour:
   InteractRange: 2
   DespawnRange: 100
   FleeSpeed: 0.3
+  SpawnInterval: 1.6
   Velocity: {x: 0, y: 0, z: 0}
   State: 0
 --- !u!114 &555484921629823196
@@ -79,7 +80,6 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
     m_TransformParent: {fileID: 3287683188186543451}
     m_Modifications:
     - target: {fileID: -9062611175035007488, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
@@ -239,7 +239,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: fdd10dc60aee60a469c22d4e07390c13, type: 3}
 --- !u!1 &5020464457930466997 stripped
 GameObject:

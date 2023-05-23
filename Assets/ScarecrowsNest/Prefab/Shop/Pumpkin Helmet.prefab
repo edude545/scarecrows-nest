@@ -31,6 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8622632617155091960}
   m_Father: {fileID: 0}
@@ -195,6 +196,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsSingleUseUpgrade: 1
+  CostKeys:
+  - {fileID: 11400000, guid: 4bd35b49938d4f0419a0db97fa2a1b72, type: 2}
+  CostValues: 01000000
   Type: 4
 --- !u!65 &7554233894606978631
 BoxCollider:

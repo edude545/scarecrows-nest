@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.1684, z: 0}
   m_LocalScale: {x: 0.039586, y: 0.32207, z: 0.33382}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1167893893979135864}
   m_RootOrder: 0
@@ -51,6 +52,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -112,6 +114,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3582079475531335283}
   m_Father: {fileID: 0}
@@ -276,6 +279,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsSingleUseUpgrade: 1
+  CostKeys:
+  - {fileID: 11400000, guid: c36559720aac2f944a3b29126211014e, type: 2}
+  CostValues: 02000000
   Type: 5
 --- !u!65 &7554233894606978631
 BoxCollider:

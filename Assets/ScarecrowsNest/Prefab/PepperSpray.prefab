@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 6965171929285387120}
   m_Father: {fileID: 4226263774157188532}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2974442148840283269
 MeshFilter:
@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 1790609298614841310}
   - component: {fileID: 8569985153490994124}
   - component: {fileID: 1255579297479861804}
+  - component: {fileID: 8792504176445861249}
   m_Layer: 0
   m_Name: PepperSpray
   m_TagString: Untagged
@@ -118,7 +119,7 @@ Transform:
   m_Children:
   - {fileID: 874484411749748023}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4626646700300985113
 MonoBehaviour:
@@ -262,6 +263,58 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &8792504176445861249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3678278410999798182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7418c7dd8f977d4e969202d3fa7e926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseEditorExpanded: 1
+  blendEditorExpanded: 1
+  poseNames:
+  - PepperSprayHold (MAIN)
+  - PepperSpraySqueeze
+  overridePreviewLeftHandPrefab: {fileID: 0}
+  overridePreviewRightHandPrefab: {fileID: 0}
+  skeletonMainPose: {fileID: 11400000, guid: 4bf4b81434b659842b5ddb483b00dfc8, type: 2}
+  skeletonAdditionalPoses:
+  - {fileID: 11400000, guid: 5085d8ba5fc9e63478d93a37a045ef30, type: 2}
+  showLeftPreview: 1
+  showRightPreview: 1
+  previewLeftInstance: {fileID: 0}
+  previewRightInstance: {fileID: 0}
+  previewPoseSelection: 0
+  blendingBehaviours:
+  - name: Squeeze Trigger
+    enabled: 1
+    influence: 1
+    pose: 1
+    value: 0
+    action_single:
+      actionPath: /actions/default/in/Squeeze
+      needsReinit: 0
+    action_bool:
+      actionPath: 
+      needsReinit: 0
+    smoothingSpeed: 100
+    type: 1
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  scale: 1
 --- !u!1 &5675505539103791523
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +346,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 874484411749748023}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5564969197322845829
 MeshFilter:

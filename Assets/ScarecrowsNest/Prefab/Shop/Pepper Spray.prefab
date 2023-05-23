@@ -30,6 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5253227155785081142}
   m_Father: {fileID: 0}
@@ -194,6 +195,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsSingleUseUpgrade: 1
+  CostKeys:
+  - {fileID: 11400000, guid: 8fc7c65b60b75b646a2bb1ec00bd50f8, type: 2}
+  - {fileID: 11400000, guid: c36559720aac2f944a3b29126211014e, type: 2}
+  CostValues: 0800000006000000
   Type: 3
 --- !u!1001 &8233005360202173570
 PrefabInstance:

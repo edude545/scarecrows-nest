@@ -12,6 +12,9 @@ public class ShopItem : MonoBehaviour
 
     public Dictionary<Plant, int> Cost;
 
+    public Plant[] CostKeys;
+    public int[] CostValues;
+
     private Transform shelf;
     private Vector3 originalPosition;
     private Quaternion originalRotation;
@@ -31,6 +34,15 @@ public class ShopItem : MonoBehaviour
 
     public Types Type;
 
+    private void OnValidate() {
+        if (CostKeys.Length == CostValues.Length) {
+            Cost = new Dictionary<Plant, int>();
+            for (int i = 0; i < CostKeys.Length; i++) {
+                Cost[CostKeys[i]] = CostValues[i];
+            }
+        }
+    }
+
     private void Awake()
     {
         shelf = transform.parent;
@@ -40,20 +52,23 @@ public class ShopItem : MonoBehaviour
         rb.useGravity = false;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        Debug.Log("Awake");
     }
 
     private void Update()
     {
-        if (transform.position.y < -10)
+        if (transform.position.y < -10f)
         {
-            ResetTransform();
+            transform.parent = shelf;
+            transform.localPosition = originalPosition;
+            transform.localRotation = originalRotation;
+            rb.useGravity = false;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
     }
 
     public void ResetTransform()
     {
-        Debug.Log("Resetting transform");
         if (IsSingleUseUpgrade)
         {
             Destroy(this);
@@ -71,13 +86,11 @@ public class ShopItem : MonoBehaviour
 
     public void OnPickup()
     {
-        Debug.Log("Picked up");
         GameController.Instance.ShopWhiteboard.LoadTextFromItem(this);
     }
 
     public void OnDetach()
     {
-        Debug.Log("Deteached");
         GameController.Instance.ShopWhiteboard.ClearText();
         rb.useGravity = true;
     }

@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2424743917951321709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8460331268493275593}
+  - component: {fileID: 1087899595874533504}
+  - component: {fileID: 6880491505050375246}
+  m_Layer: 0
+  m_Name: Parrot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8460331268493275593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2424743917951321709}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20.616096, y: 1.7943398, z: 59.780735}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1087899595874533504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2424743917951321709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16795f14a84c63544bad7698e48905b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FlySpeed: 0.1
+  Braveness: 1
+  FearDecay: 0.002
+  VisualContactAngle: 67.39
+  CorrectionWeight: 0.5
+  animator: {fileID: 0}
+  Target: {fileID: 0}
+  IsAggressive: 0
+  FavoritePlant: {fileID: 11400000, guid: 8fc7c65b60b75b646a2bb1ec00bd50f8, type: 2}
+  Fear: 0
+  Fleeing: 0
+  InteractRange: 2
+  DespawnRange: 100
+  FleeSpeed: 0.3
+  SpawnInterval: 1.6
+  Velocity: {x: 0, y: 0, z: 0}
+  State: 0
+--- !u!114 &6880491505050375246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2424743917951321709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e4b10bc1d93b8446abf16a09e778338, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

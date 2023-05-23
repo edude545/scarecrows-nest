@@ -33,4 +33,9 @@ public class ScarecrowGun : BeltObject
         }
     }
 
+    public void Refill()
+    {
+        Charge = MaxCharge;
+    }
+
 }

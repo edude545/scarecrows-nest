@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour {
     public float RoundEndTime = 5f;
 
     public Dictionary<Plant, int> Resources = new Dictionary<Plant, int>();
+    public Plant cheatplant;
 
     public CropSpawnDictionary CropSpawnDictionary;
     public WeightedRandom<GameObject> birdSpawner;
@@ -56,6 +57,14 @@ public class GameController : MonoBehaviour {
     // --- Farm island attributes
 
     public Transform FarmPlayerSpot;
+
+    public GameObject SeedBagPumpkin;
+    public GameObject SeedBagPepper;
+
+    public ScarecrowGun NoiseGun;
+    public ScarecrowGun PepperSpray;
+
+    public float PumpkinArmor = 0f;
 
     public Transform LiveCrops;
     public Transform DeadCrops;
@@ -80,7 +89,6 @@ public class GameController : MonoBehaviour {
 
     public bool VRFallback = false;
     public Canvas UICanvasPrefab;
-    public SteamVR_Action_Boolean DebugModeToggle;
     public SteamVR_Action_Single UseHeldObject;
 
     // ---
@@ -94,6 +102,7 @@ public class GameController : MonoBehaviour {
 
     private void Awake() {
         Instance = this;
+        AddResource(cheatplant, 100);
     }
 
     private void Start() {
@@ -111,7 +120,6 @@ public class GameController : MonoBehaviour {
         canv.worldCamera = Head.GetComponent<Camera>();
         canv.planeDistance = 0.5f;
 
-        DebugModeToggle.AddOnStateUpListener(DebugToggleMode, SteamVR_Input_Sources.RightHand);
         UseHeldObject.AddOnAxisListener(UseHeldItemLeft, SteamVR_Input_Sources.LeftHand);
         UseHeldObject.AddOnAxisListener(UseHeldItemRight, SteamVR_Input_Sources.RightHand);
     }

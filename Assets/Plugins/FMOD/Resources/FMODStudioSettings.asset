@@ -439,8 +439,19 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
-  Banks: []
+  MasterBanks:
+  - Master
+  Banks:
+  - Action Song
+  - Character
+  - Collisions
+  - Crows
+  - Gardening Sounds
+  - Main Menu Song
+  - Sea
+  - Seagulls
+  - Shop Song
+  - Wind
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

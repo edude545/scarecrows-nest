@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcd5a67482ba3224d89210e54df39bd9, type: 3}
+  m_Name: Pepper
+  m_EditorClassIdentifier: 
+  Name: Pepper
+  RequiredSeeds: 3
+  MaxHP: 4
+  GrowthTime: 2
+  MinYield: 1
+  MaxYield: 3
+  Model: {fileID: 2608438339957573683, guid: 8a0e7bc2debb5a7459993cb89484c1aa, type: 3}

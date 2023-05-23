@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pumpkin
   m_EditorClassIdentifier: 
   Name: Pumpkin
-  RequiredSeeds: 4
+  RequiredSeeds: 5
   MaxHP: 5
   GrowthTime: 3
   MinYield: 1

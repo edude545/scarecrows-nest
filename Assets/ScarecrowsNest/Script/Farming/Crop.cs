@@ -62,6 +62,11 @@ public class Crop : MonoBehaviour
         Canvas.transform.LookAt(GameController.Instance.Head.transform);
     }
 
+    public void TakeDamage(float damage)
+    {
+        HP -= damage;
+    }
+
     public void ReceiveSeed(Plant plantType)
     {
         if (PlantType == null)

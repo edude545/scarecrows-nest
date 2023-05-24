@@ -10,10 +10,12 @@ public class WaggleTrigger : MonoBehaviour
     public float WaggleDecay = 0.002f;
     public float Waggle = 0f;
 
+    public bool AffectedByBodySize;
+
     protected void updateWaggleScore()
     {
         var angle = Mathf.Clamp(VisualContactAngle - Vector3.Angle(Camera.main.transform.rotation * Vector3.forward, transform.position - Camera.main.transform.position), 0, VisualContactAngle);
-        Waggle += GameController.GlobalWaggleMultiplier * (0.3f + Mathf.InverseLerp(0, VisualContactAngle, angle));
+        Waggle += GameController.GlobalWaggleMultiplier * (AffectedByBodySize ? GameController.Instance.BodySize : 1f) * (0.3f + Mathf.InverseLerp(0, VisualContactAngle, angle));
         Waggle = Mathf.Max(Waggle - WaggleDecay, 0);
     }
 

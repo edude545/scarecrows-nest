@@ -134,8 +134,8 @@ public class GameController : MonoBehaviour {
         canv.worldCamera = Head.GetComponent<Camera>();
         canv.planeDistance = 0.5f;
 
-        UseHeldObject.AddOnAxisListener(UseHeldItemLeft, SteamVR_Input_Sources.LeftHand);
-        UseHeldObject.AddOnAxisListener(UseHeldItemRight, SteamVR_Input_Sources.RightHand);
+        UseHeldObject.AddOnUpdateListener(UseHeldItemLeft, SteamVR_Input_Sources.LeftHand);
+        UseHeldObject.AddOnUpdateListener(UseHeldItemRight, SteamVR_Input_Sources.RightHand);
     }
 
     public Plant Wheat;
@@ -190,6 +190,7 @@ public class GameController : MonoBehaviour {
             PortalToShop.gameObject.SetActive(false);
             FarmerBeltItems.gameObject.SetActive(false);
             ScarecrowBeltItems.gameObject.SetActive(true);
+            NoiseGun.Refill();
             roundTimer = 0f;
             StartCoroutine(spawnBird());
             if (!VRFallback) {
@@ -222,6 +223,11 @@ public class GameController : MonoBehaviour {
             ScarecrowBeltItems.gameObject.SetActive(false);
             Debug.Log("Moving to shop");
         }
+    }
+
+    public void DamagePlayer(float damage)
+    {
+        BodySize -= damage;
     }
 
     public void ChangeCycle()
@@ -368,12 +374,14 @@ public class GameController : MonoBehaviour {
     }
 
     private IEnumerator spawnBird() {
+        GameObject prefab;
         GameObject spawnedBird;
         while (true) {
             if (GameState == GameStates.Scarecrow) {
-                //spawnedBird = Instantiate(birdSpawner.Choose(), Birds.transform);
-                spawnedBird = Instantiate(CrowPrefab, Birds.transform);
-                Vector3 spawn = UnityEngine.Random.onUnitSphere * SpawnDistance;
+                //prefab = birdSpawner.Choose();
+                prefab = CrowPrefab;
+                spawnedBird = Instantiate(prefab, Birds.transform);
+                Vector3 spawn = UnityEngine.Random.onUnitSphere * prefab.GetComponent<Bird>().SpawnDistance;
                 if (spawn.y < 0) {
                     spawn.y = -spawn.y;
                 }

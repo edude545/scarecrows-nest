@@ -19,3 +19,4 @@ MonoBehaviour:
   MinYield: 1
   MaxYield: 3
   Model: {fileID: 2608438339957573683, guid: 8a0e7bc2debb5a7459993cb89484c1aa, type: 3}
+  SeedModel: {fileID: 2608438339957573683, guid: 9d6fb95c1e28e764d93ff73d0ed87d69, type: 3}

@@ -46,11 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VisualContactAngle: 67.39
-  MaxWaggle: 1
-  WaggleDecay: 0.002
+  MaxWaggle: 20
+  WaggleDecay: 0
   Waggle: 0
   AffectedByBodySize: 1
-  FlySpeed: 0.1
+  FlySpeed: 0.03
   animator: {fileID: 0}
   Target: {fileID: 0}
   IsAggressive: 0
@@ -59,8 +59,8 @@ MonoBehaviour:
   InteractRange: 2
   DespawnRange: 100
   FleeSpeed: 0.3
-  DamageDealt: 0.1
-  SpawnInterval: 1.6
+  DamageDealt: 0.4
+  SpawnInterval: 5
   SpawnDistance: 100
   Velocity: {x: 0, y: 0, z: 0}
   State: 0

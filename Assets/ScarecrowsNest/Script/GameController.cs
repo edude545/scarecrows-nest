@@ -48,7 +48,9 @@ public class GameController : MonoBehaviour {
     public Dictionary<Plant, int> Resources = new Dictionary<Plant, int>();
     public Plant cheatplant;
 
-    public CropSpawnDictionary CropSpawnDictionary;
+    public Plant[] CSDPlants;
+    public GameObject[] CSDPrefabs;
+    public float[] CSDWeights;
     public WeightedRandom<GameObject> birdSpawner;
 
     public static float LeftArmExtension;
@@ -63,6 +65,8 @@ public class GameController : MonoBehaviour {
 
     public Transform FarmPlayerSpot;
 
+    public Whiteboard BodySizeWhiteboard;
+
     public GameObject SeedBagPumpkin;
     public GameObject SeedBagPepper;
 
@@ -75,6 +79,8 @@ public class GameController : MonoBehaviour {
     public Transform LiveCrops;
     public Transform DeadCrops;
     public Transform Birds;
+
+    public GameObject FakeScarecrow;
 
     // --- Shop island attributes
 
@@ -120,6 +126,7 @@ public class GameController : MonoBehaviour {
 
     private void Start() {
         ChangeCycle();
+        ChangeBodySize(0f);
         Canvas canv = Instantiate(UICanvasPrefab);
         if (VRFallback) {
             Transform noSteamVRFallbackObjects = Player.transform.Find("NoSteamVRFallbackObjects");
@@ -159,6 +166,7 @@ public class GameController : MonoBehaviour {
                 ChangeGameState(GameStates.Farm);
             }
         } else if (GameState == GameStates.Farm) {
+            FakeScarecrow.SetActive(false);
             if (Input.GetKeyDown("m")) {
                 ChangeGameState(GameStates.Shop);
             } else if (Input.GetKeyDown("c")) {
@@ -175,7 +183,7 @@ public class GameController : MonoBehaviour {
                 }
             }
         } else if (GameState == GameStates.Shop) {
-
+            FakeScarecrow.SetActive(true);
             if (Input.GetKeyDown("m")) {
                 ChangeGameState(GameStates.Farm);
             }
@@ -197,7 +205,7 @@ public class GameController : MonoBehaviour {
                 LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabScarecrow);
                 RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabScarecrow);
             }
-            //generateBirdSpawner();
+            generateBirdSpawner();
             Debug.Log("Scarecrow phase beginning");
         } else if (GameState == GameStates.ScarecrowEnd) {
             Debug.Log("Scarecrow phase ending...");
@@ -205,6 +213,7 @@ public class GameController : MonoBehaviour {
             RoundStarter.gameObject.SetActive(true);
             PortalToFarm.gameObject.SetActive(false);
             PortalToShop.gameObject.SetActive(true);
+            FakeScarecrow.SetActive(false);
             Player.transform.parent = FarmPlayerSpot;
             Player.transform.localPosition = Vector3.zero;
             Debug.Log("Entering farm phase");
@@ -215,6 +224,7 @@ public class GameController : MonoBehaviour {
                 RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabFarmer);
             }
         } else if (GameState == GameStates.Shop) {
+            RoundStarter.gameObject.SetActive(false);
             PortalToFarm.gameObject.SetActive(true);
             PortalToShop.gameObject.SetActive(false);
             Player.transform.parent = ShopPlayerSpot;
@@ -225,9 +235,17 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public void DamagePlayer(float damage)
+    public void ChangeBodySize(float d)
     {
-        BodySize -= damage;
+        BodySize += d;
+        if (BodySize < 0)
+        {
+            Player.GetComponent<Animator>().SetBool("IsDead", true);
+            BodySizeWhiteboard.Text.SetText("YOU DIED");
+        } else
+        {
+            BodySizeWhiteboard.Text.SetText("Body size:\n" + BodySize);
+        }
     }
 
     public void ChangeCycle()
@@ -259,16 +277,20 @@ public class GameController : MonoBehaviour {
         obj.Use(triggerValue);
     }
 
+    // ghdgskjsdhfjg
     private void generateBirdSpawner() {
         Dictionary<GameObject, float> dict = new Dictionary<GameObject, float>();
-        Tuple<GameObject, float>[] weightPairs;
         for (int i = 0; i < LiveCrops.childCount; i++) {
-            weightPairs = CropSpawnDictionary.CropToBirdPrefabs[LiveCrops.transform.GetChild(i).GetComponent<Crop>().PlantType];
-            foreach (Tuple<GameObject,float> pair in weightPairs) {
-                if (!dict.ContainsKey(pair.Item1)) {
-                    dict[pair.Item1] = 0;
+            for (int j = 0; j < CSDPlants.Length; j++)
+            {
+                if (LiveCrops.transform.GetChild(i).GetComponent<Crop>().PlantType == CSDPlants[j])
+                {
+                    if (!dict.ContainsKey(CSDPrefabs[j]))
+                    {
+                        dict[CSDPrefabs[j]] = 0;
+                    }
+                    dict[CSDPrefabs[j]] += CSDWeights[j];
                 }
-                dict[pair.Item1] += pair.Item2;
             }
         }
         float[] weights = new float[dict.Count];
@@ -381,13 +403,7 @@ public class GameController : MonoBehaviour {
                 //prefab = birdSpawner.Choose();
                 prefab = CrowPrefab;
                 spawnedBird = Instantiate(prefab, Birds.transform);
-                Vector3 spawn = UnityEngine.Random.onUnitSphere * prefab.GetComponent<Bird>().SpawnDistance;
-                if (spawn.y < 0) {
-                    spawn.y = -spawn.y;
-                }
-                if (spawn.y < 10) {
-                    spawn.y = 10;
-                }
+                Vector3 spawn = Player.transform.position + UnityEngine.Random.onUnitSphere * prefab.GetComponent<Bird>().SpawnDistance;
                 spawnedBird.transform.position = spawn;
                 yield return new WaitForSeconds(spawnedBird.GetComponent<Bird>().SpawnInterval * SpawnIntervalMultiplier);
             } else {

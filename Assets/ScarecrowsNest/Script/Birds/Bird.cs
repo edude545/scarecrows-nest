@@ -67,8 +67,12 @@ public class Bird : WaggleTrigger {
             transform.rotation = Quaternion.LookRotation(velocity);
         } else if (State == States.Eating) {
             Target.GetComponent<Crop>().TakeDamage(DamageDealt);
+            if (Target.GetComponent<Crop>().IsDead())
+            {
+                ChangeState(States.Fleeing);
+            }
         } else if (State == States.Attacking) {
-            GameController.Instance.DamagePlayer(DamageDealt);
+            GameController.Instance.ChangeBodySize(-DamageDealt);
         } else if (State == States.Fleeing) {
             transform.position += FleeSpeed * transform.position.normalized;
         }

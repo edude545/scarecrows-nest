@@ -65,6 +65,16 @@ public class Crop : MonoBehaviour
     public void TakeDamage(float damage)
     {
         HP -= damage;
+        if (IsDead())
+        {
+            transform.parent = GameController.Instance.DeadCrops.transform;
+            updateModel();
+        }
+    }
+
+    public bool IsDead()
+    {
+        return HP < 0f;
     }
 
     public void ReceiveSeed(Plant plantType)
@@ -94,19 +104,12 @@ public class Crop : MonoBehaviour
         updateModel();
     }
 
-    public void OnCropKilled()
-    {
-        transform.parent = GameController.Instance.DeadCrops.transform;
-        updateModel();
-    }
-
     protected void updateText()
     {
         if (PlantType == null) {
             Canvas.gameObject.SetActive(false);
         } else {
             Canvas.gameObject.SetActive(true);
-            string s;
             if (PlantedSeeds < PlantType.RequiredSeeds) {
                 Text.SetText(PlantType.Name + "\n" + PlantedSeeds + " / " + PlantType.RequiredSeeds);
                 Text.ForceMeshUpdate();

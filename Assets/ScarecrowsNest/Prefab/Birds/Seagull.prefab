@@ -60,8 +60,8 @@ MonoBehaviour:
   InteractRange: 2
   DespawnRange: 100
   FleeSpeed: 0.3
-  DamageDealt: 0.1
-  SpawnInterval: 2
+  DamageDealt: 0.002
+  SpawnInterval: 0.5
   SpawnDistance: 40
   Velocity: {x: 0, y: 0, z: 0}
   State: 0

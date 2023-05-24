@@ -29,12 +29,17 @@ public class GameController : MonoBehaviour {
     public GameObject RightHandModelPrefabFarmer;
 
     // --- Player attributes
+    public Transform BeltItems;
     public Transform FarmerBeltItems;
     public Transform ScarecrowBeltItems;
     BeltObject leftHeldObject;
     BeltObject rightHeldObject;
 
     // --- Game attributes
+
+    public WaggleGameStateChanger PortalToShop;
+    public WaggleGameStateChanger PortalToFarm;
+    public WaggleGameStateChanger RoundStarter;
 
     public GameStates GameState = GameStates.Farm;
     float roundTimer = 0f; // seconds
@@ -52,7 +57,7 @@ public class GameController : MonoBehaviour {
     public static Vector3 RightHandLastPos;
     public static float LeftHandWaggleScore;
     public static float RightHandWaggleScore;
-    public static float WaggleScore;
+    public static float GlobalWaggleMultiplier;
 
     // --- Farm island attributes
 
@@ -64,6 +69,7 @@ public class GameController : MonoBehaviour {
     public ScarecrowGun NoiseGun;
     public ScarecrowGun PepperSpray;
 
+    public float BodySize = 50f;
     public float PumpkinArmor = 0f;
 
     public Transform LiveCrops;
@@ -75,6 +81,8 @@ public class GameController : MonoBehaviour {
     public Transform ShopPlayerSpot;
 
     public Whiteboard ShopWhiteboard;
+    public Whiteboard ResourcesWhiteboard;
+    public Whiteboard CheckoutWhiteboard;
 
     public GameObject UpgradeUnlockPlantPumpkin;
     public GameObject UpgradeUnlockPlantPepper;
@@ -100,12 +108,18 @@ public class GameController : MonoBehaviour {
         ScarecrowEnd, // No birds spawn; move to next game phase once all birds have been scared away
     }
 
+    public int Cycle;
+    public CycleSettings[] Cycles;
+    public Light DirectionalLight;
+    public Material OceanMaterial;
+
     private void Awake() {
         Instance = this;
         AddResource(cheatplant, 100);
     }
 
     private void Start() {
+        ChangeCycle();
         Canvas canv = Instantiate(UICanvasPrefab);
         if (VRFallback) {
             Transform noSteamVRFallbackObjects = Player.transform.Find("NoSteamVRFallbackObjects");
@@ -126,21 +140,22 @@ public class GameController : MonoBehaviour {
 
     public Plant Wheat;
     private void Update() {
+        calculateWaggle();
+        BeltItems.position = Head.transform.position - new Vector3(0f, 0.5f, 0f);
         if (Input.GetKeyDown("space")) {
             for (int i = 0; i < Birds.transform.childCount; i++) {
-                Birds.transform.GetChild(i).GetComponent<Bird>().Spook(DebugSpookAmount);
+                Birds.transform.GetChild(i).GetComponent<Bird>().Waggle += DebugSpookAmount;
             }
         }
         if (GameState == GameStates.Scarecrow) {
-            calculateWaggle();
             roundTimer += Time.deltaTime;
             if (roundTimer >= RoundEndTime || Input.GetKeyDown("c")) {
                 ChangeGameState(GameStates.ScarecrowEnd);
             }
         } else if (GameState == GameStates.ScarecrowEnd) {
-            calculateWaggle();
             if (Birds.transform.childCount == 0) {
                 onCycleEnd();
+                ChangeCycle();
                 ChangeGameState(GameStates.Farm);
             }
         } else if (GameState == GameStates.Farm) {
@@ -170,6 +185,9 @@ public class GameController : MonoBehaviour {
     public void ChangeGameState(GameStates gs) {
         GameState = gs;
         if (GameState == GameStates.Scarecrow) {
+            RoundStarter.gameObject.SetActive(false);
+            PortalToFarm.gameObject.SetActive(false);
+            PortalToShop.gameObject.SetActive(false);
             FarmerBeltItems.gameObject.SetActive(false);
             ScarecrowBeltItems.gameObject.SetActive(true);
             roundTimer = 0f;
@@ -183,6 +201,9 @@ public class GameController : MonoBehaviour {
         } else if (GameState == GameStates.ScarecrowEnd) {
             Debug.Log("Scarecrow phase ending...");
         } else if (GameState == GameStates.Farm) {
+            RoundStarter.gameObject.SetActive(true);
+            PortalToFarm.gameObject.SetActive(false);
+            PortalToShop.gameObject.SetActive(true);
             Player.transform.parent = FarmPlayerSpot;
             Player.transform.localPosition = Vector3.zero;
             Debug.Log("Entering farm phase");
@@ -193,12 +214,27 @@ public class GameController : MonoBehaviour {
                 RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabFarmer);
             }
         } else if (GameState == GameStates.Shop) {
+            PortalToFarm.gameObject.SetActive(true);
+            PortalToShop.gameObject.SetActive(false);
             Player.transform.parent = ShopPlayerSpot;
             Player.transform.localPosition = Vector3.zero;
             FarmerBeltItems.gameObject.SetActive(false);
             ScarecrowBeltItems.gameObject.SetActive(false);
             Debug.Log("Moving to shop");
         }
+    }
+
+    public void ChangeCycle()
+    {
+        Cycle++;
+        if (Cycle == Cycles.Length)
+        {
+            Cycle = 0;
+        }
+        CycleSettings cs = Cycles[Cycle];
+        DirectionalLight.intensity = cs.LightIntensity;
+        OceanMaterial.SetColor("_BaseColor", cs.OceanColor);
+        RenderSettings.skybox = cs.Skybox;
     }
 
     public void DebugToggleMode() {
@@ -275,13 +311,14 @@ public class GameController : MonoBehaviour {
     public void AddResource(Plant PlantType, int amount) {
         int n = Resources.ContainsKey(PlantType) ? Resources[PlantType] : 0;
         Resources[PlantType] = n + amount;
+        ResourcesWhiteboard.LoadTextFromResources(Resources);
         Debug.Log("Got "+amount+" "+PlantType.name);
     }
 
     public bool AttemptPurchase(Dictionary<Plant, int> cost) {
         bool valid = true;
         foreach (var kvp in cost) {
-            if (Resources[kvp.Key] <= kvp.Value) {
+            if (!Resources.ContainsKey(kvp.Key) || Resources[kvp.Key] <= kvp.Value) {
                 valid = false;
             }
         }
@@ -290,7 +327,21 @@ public class GameController : MonoBehaviour {
                 Resources[kvp.Key] -= kvp.Value;
             }
         }
+        ResourcesWhiteboard.LoadTextFromResources(Resources);
         return valid;
+    }
+
+    public void CheckoutText(string text)
+    {
+        CheckoutWhiteboard.Text.SetText(text);
+        StartCoroutine(resetCheckoutText());
+    }
+
+    private IEnumerator resetCheckoutText()
+    {
+        yield return new WaitForSeconds(4);
+        CheckoutWhiteboard.Text.SetText("Please place your items\nin the bagging area\nv");
+        yield return null;
     }
 
     private void calculateWaggle() {
@@ -303,9 +354,9 @@ public class GameController : MonoBehaviour {
                                 * (LeftArmExtension * ArmExtensionImportance + 1 - ArmExtensionImportance);
             LeftArmExtension = (Head.transform.position - LeftHand.transform.position).magnitude;
             LeftHandLastPos = LeftHand.transform.position;
-            WaggleScore = (RightHandWaggleScore + LeftHandWaggleScore) * WaggleScoreMultiplier;
+            GlobalWaggleMultiplier = (RightHandWaggleScore + LeftHandWaggleScore) * WaggleScoreMultiplier;
         } else {
-            WaggleScore = RightHandWaggleScore * 2 * WaggleScoreMultiplier;
+            GlobalWaggleMultiplier = RightHandWaggleScore * 2 * WaggleScoreMultiplier;
         }
     }
 

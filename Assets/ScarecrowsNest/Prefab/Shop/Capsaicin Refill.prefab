@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0afd57c6d6430ba478390d486604d5a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsSingleUseUpgrade: 1
+  IsSingleUseUpgrade: 0
   CostKeys:
   - {fileID: 11400000, guid: c36559720aac2f944a3b29126211014e, type: 2}
   CostValues: 02000000

@@ -28,6 +28,7 @@ public class ShopItem : MonoBehaviour
         UnlockToolNoiseGun,
         UnlockToolPepperSpray,
 
+        HayArmor,
         PumpkinHead,
         CapsaicinRefill
     }
@@ -49,44 +50,32 @@ public class ShopItem : MonoBehaviour
         originalPosition = transform.localPosition;
         originalRotation = transform.localRotation;
         rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        ResetTransform();
     }
 
     private void Update()
     {
         if (transform.position.y < -10f)
         {
-            transform.parent = shelf;
-            transform.localPosition = originalPosition;
-            transform.localRotation = originalRotation;
-            rb.useGravity = false;
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            ResetTransform();
         }
     }
 
     public void ResetTransform()
     {
-        if (IsSingleUseUpgrade)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            transform.parent = shelf;
-            transform.localPosition = originalPosition;
-            transform.localRotation = originalRotation;
-            rb.useGravity = false;
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
+        transform.parent = shelf;
+        transform.localPosition = originalPosition;
+        transform.localRotation = originalRotation;
+        rb.useGravity = false;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     public void OnPickup()
     {
         GameController.Instance.ShopWhiteboard.LoadTextFromItem(this);
+        rb.constraints = RigidbodyConstraints.None;
     }
 
     public void OnDetach()
@@ -114,13 +103,17 @@ public class ShopItem : MonoBehaviour
             GameController.Instance.PepperSpray.gameObject.SetActive(true);
             GameController.Instance.PepperSpray.Refill();
         }
-        else if (Type == Types.CapsaicinRefill)
+        else if (Type == Types.HayArmor)
         {
-            GameController.Instance.PepperSpray.Refill();
+            GameController.Instance.BodySize += 30f;
         }
         else if (Type == Types.PumpkinHead)
         {
             GameController.Instance.PumpkinArmor = 100f;
+        }
+        else if (Type == Types.CapsaicinRefill)
+        {
+            GameController.Instance.PepperSpray.Refill();
         }
     }
 

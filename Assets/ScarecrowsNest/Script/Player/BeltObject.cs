@@ -12,8 +12,8 @@ public class BeltObject : Throwable
     protected override void Awake()
     {
         base.Awake();
-        beltSnapPos = transform.position;
-        beltSnapRot = transform.rotation;
+        beltSnapPos = transform.localPosition;
+        beltSnapRot = transform.localRotation;
     }
 
     public virtual void Use(float triggerValue) {
@@ -22,8 +22,6 @@ public class BeltObject : Throwable
     protected override void OnAttachedToHand(Hand hand)
     {
         base.OnAttachedToHand(hand);
-        transform.localRotation = Quaternion.identity;
-        attachRotation = Quaternion.identity;
         GameController.Instance.OnBeltObjectAttached(this, hand);
     }
 
@@ -35,8 +33,8 @@ public class BeltObject : Throwable
         hand.HoverUnlock(null);
         //
 
-        transform.position = beltSnapPos;
-        transform.rotation = beltSnapRot;
+        transform.localPosition = beltSnapPos;
+        transform.localRotation = beltSnapRot;
         GameController.Instance.OnBeltObjectDetached(hand);
     }
 

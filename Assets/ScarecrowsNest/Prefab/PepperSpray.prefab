@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3506243788167255786}
   m_LocalRotation: {x: -0.0000001490116, y: 0.000000119209275, z: 0.000000042840835, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.045912314, y: 0.045912314, z: 0.045912314}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6965171929285387120}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1790609298614841310}
   - component: {fileID: 8569985153490994124}
   - component: {fileID: 1255579297479861804}
-  - component: {fileID: 8792504176445861249}
+  - component: {fileID: 4576612927287228863}
   m_Layer: 0
   m_Name: PepperSpray
   m_TagString: Untagged
@@ -261,9 +261,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &8792504176445861249
+  m_Size: {x: 0.048927344, y: 0.09240502, z: 0.04567218}
+  m_Center: {x: -0.000098679215, y: 0.0002656281, z: -0.0001128912}
+--- !u!114 &4576612927287228863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -280,18 +280,18 @@ MonoBehaviour:
   poseNames:
   - PepperSprayHold (MAIN)
   - PepperSpraySqueeze
-  overridePreviewLeftHandPrefab: {fileID: 0}
-  overridePreviewRightHandPrefab: {fileID: 0}
+  overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf, type: 3}
+  overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25, type: 3}
   skeletonMainPose: {fileID: 11400000, guid: 4bf4b81434b659842b5ddb483b00dfc8, type: 2}
   skeletonAdditionalPoses:
   - {fileID: 11400000, guid: 5085d8ba5fc9e63478d93a37a045ef30, type: 2}
-  showLeftPreview: 1
-  showRightPreview: 1
+  showLeftPreview: 0
+  showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
-  previewPoseSelection: 0
+  previewPoseSelection: 1
   blendingBehaviours:
-  - name: Squeeze Trigger
+  - name: New Behaviour
     enabled: 1
     influence: 1
     pose: 1
@@ -302,7 +302,7 @@ MonoBehaviour:
     action_bool:
       actionPath: 
       needsReinit: 0
-    smoothingSpeed: 100
+    smoothingSpeed: 0
     type: 1
     useMask: 0
     mask:

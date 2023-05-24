@@ -4,20 +4,16 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Bird : MonoBehaviour {
+public class Bird : WaggleTrigger {
 
     public float FlySpeed = 0.01f;
-    public float Braveness = 1f;
-    public float FearDecay = 0.002f;
-    [Range(0,360)] public float VisualContactAngle = 30f;
-    public float CorrectionWeight = 0.5f;
+    
     public Animator animator;
 
     public GameObject Target; // most birds target crops, aggressive birds target the player
     public bool IsAggressive = false;
     public Plant FavoritePlant;
 
-    public float Fear = 0f;
     public bool Fleeing = false;
 
     public float InteractRange = 2f;
@@ -90,9 +86,10 @@ public class Bird : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        var angle = Mathf.Clamp(VisualContactAngle-Vector3.Angle(Camera.main.transform.rotation * Vector3.forward, transform.position - Camera.main.transform.position), 0, VisualContactAngle);
-        Spook(GameController.WaggleScore * (0.3f+Mathf.InverseLerp(0, VisualContactAngle, angle)));
-        Fear = Mathf.Max(Fear - FearDecay, 0);
+        if (Waggle > MaxWaggle)
+        {
+            ChangeState(States.Fleeing);
+        }
     }
 
     void findTarget() {
@@ -111,13 +108,6 @@ public class Bird : MonoBehaviour {
             Debug.Log("Making weighted random chooser...");
             WeightedRandom<Crop> crops = new WeightedRandom<Crop>(weights, values);
             Target = crops.Choose().gameObject;
-        }
-    }
-
-    public void Spook(float f) {
-        Fear += f;
-        if (Fear >= Braveness) {
-            ChangeState(States.Fleeing);
         }
     }
 

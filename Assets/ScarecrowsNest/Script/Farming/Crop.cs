@@ -54,6 +54,7 @@ public class Crop : MonoBehaviour
                 useHandObjectAttachmentPoint = false;
             }
         }*/
+        updateText();
     }
 
     private void Update()
@@ -67,6 +68,7 @@ public class Crop : MonoBehaviour
         {
             PlantType = plantType;
             PlantedSeeds = 0;
+            Canvas.gameObject.SetActive(true);
         }
         if (PlantType == plantType)
         {
@@ -101,13 +103,12 @@ public class Crop : MonoBehaviour
             Canvas.gameObject.SetActive(true);
             string s;
             if (PlantedSeeds < PlantType.RequiredSeeds) {
-                s = PlantType.Name + "\n" + PlantedSeeds + " / " + PlantType.RequiredSeeds;
+                Text.SetText(PlantType.Name + "\n" + PlantedSeeds + " / " + PlantType.RequiredSeeds);
+                Text.ForceMeshUpdate();
+                TextBG.GetComponent<RectTransform>().sizeDelta = Text.GetRenderedValues() + new Vector2(1, 1);
             } else {
-                s = PlantType.Name;
+                Canvas.gameObject.SetActive(false);
             }
-            Text.SetText(s);
-            Text.ForceMeshUpdate();
-            TextBG.GetComponent<RectTransform>().sizeDelta = Text.GetRenderedValues() + new Vector2(1, 1);
         }
     }
 
@@ -132,12 +133,16 @@ public class Crop : MonoBehaviour
                 Destroy(model);
             }
         } else {
-            if (model == null) {
-                model = Instantiate(PlantType.Model, transform);
-                model.transform.position += new Vector3(0f, 0.155f, 0f);
+            if (PlantedSeeds >= PlantType.RequiredSeeds)
+            {
+                if (model == null)
+                {
+                    model = Instantiate(PlantType.Model, transform);
+                    model.transform.position += new Vector3(0f, 0.155f, 0f);
+                }
+                float s = (GrowthStage * 4.0f + 4) / (PlantType.GrowthTime + 4); // Add 4 to values so the crop is visible at stage 0
+                model.transform.localScale = new Vector3(s, s, s);
             }
-            float s = (GrowthStage*4.0f + 4) / (PlantType.GrowthTime + 4); // Add 4 to values so the crop is visible at stage 0
-            model.transform.localScale = new Vector3(s, s, s);
         }
     }
 

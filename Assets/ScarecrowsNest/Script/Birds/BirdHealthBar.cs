@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,9 +39,9 @@ public class BirdHealthBar : MonoBehaviour
     private void Update()
     {
         //bar.transform.rotation = crow.Target.transform.rotation;
-        float f = crow.Fear / crow.Braveness;
+        float f = crow.Waggle / crow.MaxWaggle;
         propBlock.SetColor("_Color", crow.Fleeing ? Color.yellow : new Color(1*f, 1*(1-f), 0));
-        bar.transform.localScale = new Vector3(f / crow.Braveness * 0.5f, 0.1f, 0.1f);
+        bar.transform.localScale = new Vector3(f * 0.5f, 0.1f, 0.1f);
         bar.GetComponent<MeshRenderer>().SetPropertyBlock(propBlock);
     }
 

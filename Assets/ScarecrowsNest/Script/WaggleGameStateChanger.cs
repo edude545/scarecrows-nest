@@ -11,14 +11,19 @@ public class WaggleGameStateChanger : WaggleTrigger
 
     void Update()
     {
-        updateWaggleScore();
-        float f = Waggle / MaxWaggle;
-        Image.color = new Color(1 * f, 1 * (1 - f), 0);
-        if (Waggle > MaxWaggle)
-        {
-            GameController.Instance.ChangeGameState(TargetState);
-            Waggle = 0f;
+        if (!GameController.Instance.VRFallback) {
+            updateWaggleScore();
+            float f = Waggle / MaxWaggle;
+            Image.color = new Color(1 * f, 1 * (1 - f), 0);
+            if (Waggle > MaxWaggle) {
+                Waggle = 0f;
+                OnTrigger();
+            }
         }
+    }
+
+    public void OnTrigger() {
+        GameController.Instance.ChangeGameState(TargetState);
     }
 
 }

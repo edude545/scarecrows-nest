@@ -323,6 +323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2346513529745964611}
   - component: {fileID: 8677110634767383064}
+  - component: {fileID: 9214005640699294753}
   m_Layer: 0
   m_Name: WGSC
   m_TagString: Untagged
@@ -362,5 +363,19 @@ MonoBehaviour:
   MaxWaggle: 0.1
   WaggleDecay: 0.001
   Waggle: 0
+  AffectedByBodySize: 0
   TargetState: 0
   Image: {fileID: 7244349331462516847}
+--- !u!65 &9214005640699294753
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9207143057273501725}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 36.599426, y: 37.319412, z: 9}
+  m_Center: {x: -0.11999512, y: -8.639821, z: 0}

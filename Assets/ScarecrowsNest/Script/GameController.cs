@@ -1,9 +1,11 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
+using static UnityEditor.PlayerSettings;
 
 public class GameController : MonoBehaviour {
     public static GameController Instance;
@@ -99,6 +101,12 @@ public class GameController : MonoBehaviour {
     public GameObject UpgradePumpkinHead;
     public GameObject UpgradeCapsaicinRefill;
 
+    // --- FMOD
+
+    public StudioEventEmitter ActionMusic;
+    public int IntensityThreshold1;
+    public int IntensityThreshold2;
+
     // --- Technical
 
     public bool VRFallback = false;
@@ -172,20 +180,24 @@ public class GameController : MonoBehaviour {
             } else if (Input.GetKeyDown("c")) {
                 ChangeGameState(GameStates.Scarecrow);
             }
-            if (Input.GetKeyDown("l")) {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit rayHit;
-                if (Physics.Raycast(ray, out rayHit)) {
-                    Planter planter = rayHit.transform.gameObject.GetComponent<Planter>();
-                    if (planter != null) {
-                        planter.Crop.ReceiveSeed(Wheat);
-                    }
-                }
-            }
         } else if (GameState == GameStates.Shop) {
             FakeScarecrow.SetActive(true);
             if (Input.GetKeyDown("m")) {
                 ChangeGameState(GameStates.Farm);
+            }
+        }
+        if (Input.GetKeyDown("l")) {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rayHit;
+            if (Physics.Raycast(ray, out rayHit)) {
+                Planter planter = rayHit.transform.gameObject.GetComponent<Planter>();
+                if (planter != null) {
+                    planter.Crop.ReceiveSeed(Wheat);
+                }
+                WaggleGameStateChanger wgsc = rayHit.transform.gameObject.GetComponent<WaggleGameStateChanger>();
+                if (wgsc != null) {
+                    wgsc.OnTrigger();
+                }
             }
         }
     }
@@ -205,7 +217,7 @@ public class GameController : MonoBehaviour {
                 LeftHand.GetComponent<Hand>().SetRenderModel(LeftHandModelPrefabScarecrow);
                 RightHand.GetComponent<Hand>().SetRenderModel(RightHandModelPrefabScarecrow);
             }
-            generateBirdSpawner();
+            //generateBirdSpawner();
             Debug.Log("Scarecrow phase beginning");
         } else if (GameState == GameStates.ScarecrowEnd) {
             Debug.Log("Scarecrow phase ending...");
@@ -395,6 +407,10 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    private void setMusicIntensity(int i) {
+        ActionMusic.SetParameter("Intensity", i);
+    }
+
     private IEnumerator spawnBird() {
         GameObject prefab;
         GameObject spawnedBird;
@@ -402,9 +418,16 @@ public class GameController : MonoBehaviour {
             if (GameState == GameStates.Scarecrow) {
                 //prefab = birdSpawner.Choose();
                 prefab = CrowPrefab;
-                spawnedBird = Instantiate(prefab, Birds.transform);
+                spawnedBird = Instantiate(prefab, Birds);
                 Vector3 spawn = Player.transform.position + UnityEngine.Random.onUnitSphere * prefab.GetComponent<Bird>().SpawnDistance;
                 spawnedBird.transform.position = spawn;
+                if (Birds.childCount > IntensityThreshold2) {
+                    setMusicIntensity(2);
+                } else if (Birds.childCount > IntensityThreshold1) {
+                    setMusicIntensity(1);
+                } else {
+                    setMusicIntensity(0);
+                }
                 yield return new WaitForSeconds(spawnedBird.GetComponent<Bird>().SpawnInterval * SpawnIntervalMultiplier);
             } else {
                 yield return null;

@@ -8,6 +8,6 @@ using UnityEngine;
 public class CropSpawnDictionary : ScriptableObject
 {
 
-    public Dictionary<Plant, Tuple<GameObject,float>[]> CropToBirdPrefabs;
+    
 
 }

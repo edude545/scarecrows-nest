@@ -231,6 +231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 447954}
   - component: {fileID: 11465950}
+  - component: {fileID: 3883152217402412288}
   m_Layer: 0
   m_Name: VRPlayer
   m_TagString: Untagged
@@ -246,7 +247,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107946}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.209, z: -0.286}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -288,6 +289,26 @@ MonoBehaviour:
     actionPath: /actions/default/in/HeadsetOnHead
     needsReinit: 0
   allowToggleTo2D: 1
+--- !u!95 &3883152217402412288
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107946}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: da74cf9ef5541774d967dd465eef9ba7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &109154
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,7 +1659,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8819891701102402104}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.155, y: 0.224, z: -0.054}
+  m_LocalPosition: {x: 0, y: 0.224, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1676,15 +1697,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4226263774157188532, guid: d9717d8dfa0b1cf45a424a3469833b2d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.341
+      value: 0.158
       objectReference: {fileID: 0}
     - target: {fileID: 4226263774157188532, guid: d9717d8dfa0b1cf45a424a3469833b2d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.049
+      value: -0.008
       objectReference: {fileID: 0}
     - target: {fileID: 4226263774157188532, guid: d9717d8dfa0b1cf45a424a3469833b2d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.072
+      value: 0.018
       objectReference: {fileID: 0}
     - target: {fileID: 4226263774157188532, guid: d9717d8dfa0b1cf45a424a3469833b2d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1746,15 +1767,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4226263774157188532, guid: b8352f13bb7e10f4fba963bc3abdb68b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.083
+      value: -0.151
       objectReference: {fileID: 0}
     - target: {fileID: 4226263774157188532, guid: b8352f13bb7e10f4fba963bc3abdb68b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.055
+      value: 0.063
       objectReference: {fileID: 0}
     - target: {fileID: 4226263774157188532, guid: b8352f13bb7e10f4fba963bc3abdb68b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.078
+      value: 0.029
       objectReference: {fileID: 0}
     - target: {fileID: 4226263774157188532, guid: b8352f13bb7e10f4fba963bc3abdb68b, type: 3}
       propertyPath: m_LocalRotation.w

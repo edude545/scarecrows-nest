@@ -38,7 +38,7 @@ public class BirdHealthBar : MonoBehaviour
 
     private void Update()
     {
-        //bar.transform.rotation = crow.Target.transform.rotation;
+        bar.transform.LookAt(GameController.Instance.Head.transform);
         float f = crow.Waggle / crow.MaxWaggle;
         propBlock.SetColor("_Color", crow.Fleeing ? Color.yellow : new Color(1*f, 1*(1-f), 0));
         bar.transform.localScale = new Vector3(f * 0.5f, 0.1f, 0.1f);

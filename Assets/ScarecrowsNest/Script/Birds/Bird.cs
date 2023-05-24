@@ -20,7 +20,10 @@ public class Bird : WaggleTrigger {
     public float DespawnRange = 200f;
     public float FleeSpeed = 20f;
 
+    public float DamageDealt = 0.1f;
+
     public float SpawnInterval = 1.6f;
+    public float SpawnDistance = 100f;
 
     public Vector3 Velocity;
 
@@ -39,25 +42,13 @@ public class Bird : WaggleTrigger {
     public void ChangeState(States state) {
         State = state;
         if (state == States.Flying) {
-            animator.SetBool("airborne", true);
-            animator.SetBool("moving", true);
-            animator.SetBool("attacking", false);
             animator.SetBool("eating", false);
             findTarget();
         } else if (state == States.Eating) {
-            animator.SetBool("airborne", false);
-            animator.SetBool("moving", false);
-            animator.SetBool("attacking", false);
             animator.SetBool("eating", true);
         } else if (state == States.Attacking) {
-            animator.SetBool("airborne", true);
-            animator.SetBool("moving", false);
-            animator.SetBool("attacking", true);
             animator.SetBool("eating", false);
         } else if (state == States.Fleeing) {
-            animator.SetBool("airborne", true);
-            animator.SetBool("moving", true);
-            animator.SetBool("attacking", false);
             animator.SetBool("eating", false);
         }
     }
@@ -67,7 +58,7 @@ public class Bird : WaggleTrigger {
             Vector3 velocity = (Target.transform.position - transform.position).normalized * FlySpeed;
             transform.position += velocity;
             if ((transform.position - Target.transform.position).magnitude <= InteractRange) {
-                if (Target.Equals(GameController.Instance.Player)) {
+                if (Target.Equals(GameController.Instance.Head)) {
                     ChangeState(States.Attacking);
                 } else {
                     ChangeState(States.Eating);
@@ -75,17 +66,20 @@ public class Bird : WaggleTrigger {
             }
             transform.rotation = Quaternion.LookRotation(velocity);
         } else if (State == States.Eating) {
-
+            Target.GetComponent<Crop>().TakeDamage(DamageDealt);
+            if (Target.GetComponent<Crop>().IsDead())
+            {
+                ChangeState(States.Fleeing);
+            }
         } else if (State == States.Attacking) {
-
+            GameController.Instance.ChangeBodySize(-DamageDealt);
         } else if (State == States.Fleeing) {
             transform.position += FleeSpeed * transform.position.normalized;
         }
-
         if (transform.position.magnitude > DespawnRange) {
             Destroy(gameObject);
         }
-
+        updateWaggleScore();
         if (Waggle > MaxWaggle)
         {
             ChangeState(States.Fleeing);
@@ -94,7 +88,7 @@ public class Bird : WaggleTrigger {
 
     void findTarget() {
         if (IsAggressive || GameController.Instance.LiveCrops.childCount == 0) {
-            Target = GameController.Instance.Player;
+            Target = GameController.Instance.Head;
         } else {
             float[] weights = new float[GameController.Instance.LiveCrops.transform.childCount];
             Crop[] values = new Crop[GameController.Instance.LiveCrops.transform.childCount];

@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2643151378854616502
 MeshFilter:
@@ -222,3 +222,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   interactable: {fileID: 0}
+  Charge: 0
+  MaxCharge: 1
+  PowerFalloff: 0.5
+  SprayAttenuation: 0
+  AngularRange: 45
+  AccuracyImportance: 0.5
+  Power: 10
+  Particles: {fileID: 0}

@@ -359,8 +359,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VisualContactAngle: 30
-  MaxWaggle: 0.2
-  WaggleDecay: 0.003
+  MaxWaggle: 0.1
+  WaggleDecay: 0.001
   Waggle: 0
   TargetState: 0
   Image: {fileID: 7244349331462516847}

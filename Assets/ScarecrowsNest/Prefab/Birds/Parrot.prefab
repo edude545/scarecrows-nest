@@ -45,21 +45,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16795f14a84c63544bad7698e48905b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlySpeed: 0.1
-  Braveness: 1
-  FearDecay: 0.002
   VisualContactAngle: 67.39
-  CorrectionWeight: 0.5
+  MaxWaggle: 20
+  WaggleDecay: 0
+  Waggle: 0
+  AffectedByBodySize: 1
+  FlySpeed: 0.03
   animator: {fileID: 0}
   Target: {fileID: 0}
   IsAggressive: 0
   FavoritePlant: {fileID: 11400000, guid: 8fc7c65b60b75b646a2bb1ec00bd50f8, type: 2}
-  Fear: 0
   Fleeing: 0
   InteractRange: 2
   DespawnRange: 100
   FleeSpeed: 0.3
-  SpawnInterval: 1.6
+  DamageDealt: 0.4
+  SpawnInterval: 5
+  SpawnDistance: 100
   Velocity: {x: 0, y: 0, z: 0}
   State: 0
 --- !u!114 &6880491505050375246

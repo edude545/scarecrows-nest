@@ -14,6 +14,8 @@ public class Seed : MonoBehaviour
     private Vector3 originalPosition;
     private Rigidbody rb;
 
+    private GameObject model;
+
     private void Awake() {
         seedBag = transform.parent;
         originalPosition = transform.localPosition;
@@ -33,10 +35,15 @@ public class Seed : MonoBehaviour
         rb.useGravity = false;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+        if (model != null)
+        {
+            Destroy(model);
+        }
     }
 
     public void OnDetach() {
         rb.useGravity = true;
+        model = Instantiate(PlantType.SeedModel, transform);
     }
 
 }

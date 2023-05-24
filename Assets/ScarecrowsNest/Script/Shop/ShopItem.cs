@@ -105,7 +105,7 @@ public class ShopItem : MonoBehaviour
         }
         else if (Type == Types.HayArmor)
         {
-            GameController.Instance.BodySize += 30f;
+            GameController.Instance.ChangeBodySize(3f);
         }
         else if (Type == Types.PumpkinHead)
         {

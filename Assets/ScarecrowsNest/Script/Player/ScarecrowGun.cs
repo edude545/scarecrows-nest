@@ -36,7 +36,7 @@ public class ScarecrowGun : BeltObject
         for (int i = 0; i < GameController.Instance.Birds.childCount; i++) {
             Bird bird = GameController.Instance.Birds.transform.GetChild(i).GetComponent<Bird>();
             Vector3 between = bird.transform.position - transform.position;
-            float angle = Mathf.Clamp(AngularRange - Vector3.Angle(transform.rotation * Vector3.forward, between), 0.1f, AngularRange);
+            float angle = Mathf.Clamp(AngularRange - Vector3.Angle(transform.rotation * Vector3.forward, between), 1f, AngularRange);
             float divisor;
             if (SprayAttenuation) {
                 float solidAngle = 2 * Mathf.PI * (1 - Mathf.Cos(angle / 2));

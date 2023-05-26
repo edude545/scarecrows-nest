@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
-using static UnityEditor.PlayerSettings;
 
 public class GameController : MonoBehaviour {
     public static GameController Instance;
@@ -48,7 +47,6 @@ public class GameController : MonoBehaviour {
     public float RoundEndTime = 5f;
 
     public Dictionary<Plant, int> Resources = new Dictionary<Plant, int>();
-    public Plant cheatplant;
 
     public Plant[] CSDPlants;
     public GameObject[] CSDPrefabs;
@@ -75,7 +73,8 @@ public class GameController : MonoBehaviour {
     public ScarecrowGun NoiseGun;
     public ScarecrowGun PepperSpray;
 
-    public float BodySize = 50f;
+    public float BodySize = 64f;
+    public float EffectiveBodySize = 8f; // equal to sqrt(BodySize)
     public float PumpkinArmor = 0f;
 
     public Transform LiveCrops;
@@ -104,6 +103,8 @@ public class GameController : MonoBehaviour {
     // --- FMOD
 
     public StudioEventEmitter ActionMusic;
+    public StudioEventEmitter ShopMusic;
+    public StudioEventEmitter SeagullAmbience;
     public int IntensityThreshold1;
     public int IntensityThreshold2;
 
@@ -129,12 +130,15 @@ public class GameController : MonoBehaviour {
 
     private void Awake() {
         Instance = this;
-        AddResource(cheatplant, 100);
+        AddResource(Wheat, 5);
     }
 
     private void Start() {
         ChangeCycle();
         ChangeBodySize(0f);
+        ActionMusic.Stop();
+        SeagullAmbience.Stop();
+        ShopMusic.Stop();
         Canvas canv = Instantiate(UICanvasPrefab);
         if (VRFallback) {
             Transform noSteamVRFallbackObjects = Player.transform.Find("NoSteamVRFallbackObjects");
@@ -210,6 +214,8 @@ public class GameController : MonoBehaviour {
             PortalToShop.gameObject.SetActive(false);
             FarmerBeltItems.gameObject.SetActive(false);
             ScarecrowBeltItems.gameObject.SetActive(true);
+            ActionMusic.Play();
+            SeagullAmbience.Play();
             NoiseGun.Refill();
             roundTimer = 0f;
             StartCoroutine(spawnBird());
@@ -225,6 +231,9 @@ public class GameController : MonoBehaviour {
             RoundStarter.gameObject.SetActive(true);
             PortalToFarm.gameObject.SetActive(false);
             PortalToShop.gameObject.SetActive(true);
+            ActionMusic.Stop();
+            SeagullAmbience.Stop();
+            ShopMusic.Stop();
             FakeScarecrow.SetActive(false);
             Player.transform.parent = FarmPlayerSpot;
             Player.transform.localPosition = Vector3.zero;
@@ -239,6 +248,7 @@ public class GameController : MonoBehaviour {
             RoundStarter.gameObject.SetActive(false);
             PortalToFarm.gameObject.SetActive(true);
             PortalToShop.gameObject.SetActive(false);
+            ShopMusic.Play();
             Player.transform.parent = ShopPlayerSpot;
             Player.transform.localPosition = Vector3.zero;
             FarmerBeltItems.gameObject.SetActive(false);
@@ -250,6 +260,7 @@ public class GameController : MonoBehaviour {
     public void ChangeBodySize(float d)
     {
         BodySize += d;
+        EffectiveBodySize = 3 * Mathf.Sqrt(BodySize);
         if (BodySize < 0)
         {
             Player.GetComponent<Animator>().SetBool("IsDead", true);
@@ -420,6 +431,12 @@ public class GameController : MonoBehaviour {
                 prefab = CrowPrefab;
                 spawnedBird = Instantiate(prefab, Birds);
                 Vector3 spawn = Player.transform.position + UnityEngine.Random.onUnitSphere * prefab.GetComponent<Bird>().SpawnDistance;
+                if (spawn.y < 0f) {
+                    spawn.y = -spawn.y;
+                }
+                if (spawn.y < 10f) {
+                    spawn.y = 10f;
+                }
                 spawnedBird.transform.position = spawn;
                 if (Birds.childCount > IntensityThreshold2) {
                     setMusicIntensity(2);

@@ -65,14 +65,14 @@ public class Crop : MonoBehaviour
     public void TakeDamage(float damage)
     {
         HP -= damage;
-        if (IsDead())
+        if (IsKilled())
         {
             transform.parent = GameController.Instance.DeadCrops.transform;
             updateModel();
         }
     }
 
-    public bool IsDead()
+    public bool IsKilled()
     {
         return HP < 0f;
     }

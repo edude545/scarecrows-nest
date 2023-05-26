@@ -67,7 +67,7 @@ public class Bird : WaggleTrigger {
             transform.rotation = Quaternion.LookRotation(velocity);
         } else if (State == States.Eating) {
             Target.GetComponent<Crop>().TakeDamage(DamageDealt);
-            if (Target.GetComponent<Crop>().IsDead())
+            if (Target.GetComponent<Crop>().IsKilled())
             {
                 ChangeState(States.Fleeing);
             }

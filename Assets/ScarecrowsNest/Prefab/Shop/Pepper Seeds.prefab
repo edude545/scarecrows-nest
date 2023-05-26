@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 1103674837713782749}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2048948264878777977
 MonoBehaviour:
@@ -218,6 +218,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1167893893979135864}
     m_Modifications:
     - target: {fileID: 1427692237422992, guid: cb0941e4ea5f7724a83a98e5da9f1850, type: 3}
@@ -271,9 +272,10 @@ PrefabInstance:
     - target: {fileID: 23474899768591408, guid: cb0941e4ea5f7724a83a98e5da9f1850, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e7476007b3e902f4fbacf11098082904, type: 2}
+      objectReference: {fileID: 2100000, guid: 4137d1ee2389c49deaa5af8120b30347, type: 2}
     m_RemovedComponents:
     - {fileID: 65363512351612336, guid: cb0941e4ea5f7724a83a98e5da9f1850, type: 3}
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: cb0941e4ea5f7724a83a98e5da9f1850, type: 3}
 --- !u!4 &1103674837713782749 stripped
 Transform:

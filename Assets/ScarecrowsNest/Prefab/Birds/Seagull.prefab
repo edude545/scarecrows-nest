@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3287683188186543451}
   - component: {fileID: 6328101653948826642}
   - component: {fileID: 555484921629823196}
-  - component: {fileID: -6969412655584995010}
   m_Layer: 0
   m_Name: Seagull
   m_TagString: Untagged
@@ -58,7 +57,7 @@ MonoBehaviour:
   IsAggressive: 0
   FavoritePlant: {fileID: 11400000, guid: 8fc7c65b60b75b646a2bb1ec00bd50f8, type: 2}
   Fleeing: 0
-  InteractRange: 2
+  InteractRange: 1
   DespawnRange: 100
   FleeSpeed: 0.3
   DamageDealt: 0.002
@@ -78,37 +77,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e4b10bc1d93b8446abf16a09e778338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-6969412655584995010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8750348635730674431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -197225996
-      Data2: 1219439130
-      Data3: 570246307
-      Data4: -1748078582
-    Path: event:/SFX/Character
-  Event: 
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &7526871369232368915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -173,9 +141,57 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6782708521462987009, guid: 876a3b4a94e482d47bf0d890c0455aa7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.14245024
+      objectReference: {fileID: 0}
+    - target: {fileID: -6782708521462987009, guid: 876a3b4a94e482d47bf0d890c0455aa7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.4219546
+      objectReference: {fileID: 0}
+    - target: {fileID: -6782708521462987009, guid: 876a3b4a94e482d47bf0d890c0455aa7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7681114
+      objectReference: {fileID: 0}
+    - target: {fileID: -6782708521462987009, guid: 876a3b4a94e482d47bf0d890c0455aa7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.46007305
+      objectReference: {fileID: 0}
+    - target: {fileID: -6782708521462987009, guid: 876a3b4a94e482d47bf0d890c0455aa7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6782708521462987009, guid: 876a3b4a94e482d47bf0d890c0455aa7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6782708521462987009, guid: 876a3b4a94e482d47bf0d890c0455aa7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 876a3b4a94e482d47bf0d890c0455aa7, type: 3}
       propertyPath: m_Name
       value: gull
+      objectReference: {fileID: 0}
+    - target: {fileID: 9181030360135179756, guid: 876a3b4a94e482d47bf0d890c0455aa7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.1329472
+      objectReference: {fileID: 0}
+    - target: {fileID: 9181030360135179756, guid: 876a3b4a94e482d47bf0d890c0455aa7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.1543576
+      objectReference: {fileID: 0}
+    - target: {fileID: 9181030360135179756, guid: 876a3b4a94e482d47bf0d890c0455aa7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9765903
+      objectReference: {fileID: 0}
+    - target: {fileID: 9181030360135179756, guid: 876a3b4a94e482d47bf0d890c0455aa7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.06906682
+      objectReference: {fileID: 0}
+    - target: {fileID: 9181030360135179756, guid: 876a3b4a94e482d47bf0d890c0455aa7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

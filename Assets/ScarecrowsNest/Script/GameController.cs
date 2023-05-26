@@ -67,6 +67,7 @@ public class GameController : MonoBehaviour {
 
     public Whiteboard BodySizeWhiteboard;
 
+    public GameObject SeedBags;
     public GameObject SeedBagPumpkin;
     public GameObject SeedBagPepper;
 
@@ -172,13 +173,12 @@ public class GameController : MonoBehaviour {
                 ChangeGameState(GameStates.ScarecrowEnd);
             }
         } else if (GameState == GameStates.ScarecrowEnd) {
-            if (Birds.transform.childCount == 0) {
+            if (Birds.transform.childCount == 0 && leftHeldObject == null && rightHeldObject == null) {
                 onCycleEnd();
                 ChangeCycle();
                 ChangeGameState(GameStates.Farm);
             }
         } else if (GameState == GameStates.Farm) {
-            FakeScarecrow.SetActive(false);
             if (Input.GetKeyDown("m")) {
                 ChangeGameState(GameStates.Shop);
             } else if (Input.GetKeyDown("c")) {
@@ -214,6 +214,7 @@ public class GameController : MonoBehaviour {
             PortalToShop.gameObject.SetActive(false);
             FarmerBeltItems.gameObject.SetActive(false);
             ScarecrowBeltItems.gameObject.SetActive(true);
+            SeedBags.SetActive(false);
             ActionMusic.Play();
             SeagullAmbience.Play();
             NoiseGun.Refill();
@@ -231,6 +232,7 @@ public class GameController : MonoBehaviour {
             RoundStarter.gameObject.SetActive(true);
             PortalToFarm.gameObject.SetActive(false);
             PortalToShop.gameObject.SetActive(true);
+            SeedBags.SetActive(true);
             ActionMusic.Stop();
             SeagullAmbience.Stop();
             ShopMusic.Stop();

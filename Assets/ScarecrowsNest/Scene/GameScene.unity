@@ -3570,6 +3570,7 @@ MonoBehaviour:
   - 3
   FarmPlayerSpot: {fileID: 1419820550}
   BodySizeWhiteboard: {fileID: 39780526}
+  SeedBags: {fileID: 576831539}
   SeedBagPumpkin: {fileID: 2002745136}
   SeedBagPepper: {fileID: 2147335974}
   NoiseGun: {fileID: 187149914}
@@ -3601,7 +3602,7 @@ MonoBehaviour:
   UseHeldObject:
     actionPath: /actions/default/in/Squeeze
     needsReinit: 0
-  Cycle: 0
+  Cycle: 1
   Cycles:
   - {fileID: 11400000, guid: b38c11ba93a622f498008db09724e30e, type: 2}
   - {fileID: 11400000, guid: 3ede4c3c394e16240be92a86c6415f48, type: 2}

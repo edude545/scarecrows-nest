@@ -43,13 +43,17 @@ public class Bird : WaggleTrigger {
         State = state;
         if (state == States.Flying) {
             animator.SetBool("eating", false);
+            animator.SetBool("attacking", false);
             findTarget();
         } else if (state == States.Eating) {
             animator.SetBool("eating", true);
+            animator.SetBool("attacking", false);
         } else if (state == States.Attacking) {
             animator.SetBool("eating", false);
+            animator.SetBool("attacking", true);
         } else if (state == States.Fleeing) {
             animator.SetBool("eating", false);
+            animator.SetBool("attacking", false);
         }
     }
 

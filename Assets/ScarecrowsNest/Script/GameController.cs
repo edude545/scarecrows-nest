@@ -131,7 +131,9 @@ public class GameController : MonoBehaviour {
 
     private void Awake() {
         Instance = this;
-        AddResource(Wheat, 5);
+        AddResource(Wheat, 30);
+        AddResource(Pumpkin, 2);
+        AddResource(Pepper, 20);
     }
 
     private void Start() {
@@ -159,6 +161,9 @@ public class GameController : MonoBehaviour {
     }
 
     public Plant Wheat;
+    public Plant Pumpkin;
+    public Plant Pepper;
+
     private void Update() {
         calculateWaggle();
         BeltItems.position = Head.transform.position - new Vector3(0f, 0.5f, 0f);

@@ -3609,6 +3609,8 @@ MonoBehaviour:
   DirectionalLight: {fileID: 617672147}
   OceanMaterial: {fileID: 2100000, guid: 8538bd626cb3e80478f62e319f75e337, type: 2}
   Wheat: {fileID: 11400000, guid: 8fc7c65b60b75b646a2bb1ec00bd50f8, type: 2}
+  Pumpkin: {fileID: 11400000, guid: 4bd35b49938d4f0419a0db97fa2a1b72, type: 2}
+  Pepper: {fileID: 11400000, guid: c36559720aac2f944a3b29126211014e, type: 2}
 --- !u!4 &1038439993
 Transform:
   m_ObjectHideFlags: 0
@@ -3844,6 +3846,10 @@ PrefabInstance:
       value: 0.029
       objectReference: {fileID: 0}
     - target: {fileID: 2078804818233556202, guid: adf1d9b9a2bdcdb4dbe7a870bd5f6069, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3939363867445292667, guid: adf1d9b9a2bdcdb4dbe7a870bd5f6069, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
